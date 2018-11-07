@@ -3,11 +3,102 @@ const router = express.Router()
 
 // Add your routes here - above the module.exports line
 
-// Branching
+
+
+router.post('/what-elements-answer', function (req, res) {
+
+  let element = req.session.data['elements']
+
+  if (element.includes('A')) {
+    res.redirect('/what-evidence')
+  }
+  else if (element.includes('B')) {
+    res.redirect('/how-check-evidence')
+  }
+  else if (element.includes('C')) {
+    res.redirect('/how-check-time')
+  }
+  else if (element.includes('D')) {
+    res.redirect('/how-check-stolen')
+  }
+  else if (element.includes('E')) {
+    res.redirect('/how-check-person')
+  }
+  else {
+    res.redirect('/alternatives')
+  }
+})
+
+
+router.post('/what-evidence-answer', function (req, res) {
+
+  let element = req.session.data['elements']
+
+  if (element.includes('B')) {
+    res.redirect('/how-check-evidence')
+  }
+  else if (element.includes('C')) {
+    res.redirect('/how-check-time')
+  }
+  else if (element.includes('D')) {
+    res.redirect('/how-check-stolen')
+  }
+  else if (element.includes('E')) {
+    res.redirect('/how-check-person')
+  }
+  else {
+    res.redirect('/result')
+  }
+})
+
+router.post('/check-evidence-answer', function (req, res) {
+
+  let element = req.session.data['elements']
+
+  if (element.includes('C')) {
+    res.redirect('/how-check-time')
+  }
+  else if (element.includes('D')) {
+    res.redirect('/how-check-stolen')
+  }
+  else if (element.includes('E')) {
+    res.redirect('/how-check-person')
+  }
+  else {
+    res.redirect('/result')
+  }
+})
+
+router.post('/check-time-answer', function (req, res) {
+
+  let element = req.session.data['elements']
+
+  if (element.includes('D')) {
+    res.redirect('/how-check-stolen')
+  }
+  else if (element.includes('E')) {
+    res.redirect('/how-check-person')
+  }
+  else {
+    res.redirect('/result')
+  }
+})
+
+router.post('/check-fraud-answer', function (req, res) {
+
+  let element = req.session.data['elements']
+
+  if (element.includes('E')) {
+    res.redirect('/how-check-person')
+  }
+  else {
+    res.redirect('/result')
+  }
+})
+
+
+// Element A scores
 router.post('/evidence-score-1-answer', function (req, res) {
-  // Get the answer from session data
-  // The name between the quotes is the same as the 'name' attribute on the input elements
-  // However in JavaScript we can't use hyphens in variable names
 
   let meetScore = req.session.data['evidence-score']
 
@@ -19,9 +110,6 @@ router.post('/evidence-score-1-answer', function (req, res) {
 })
 
 router.post('/evidence-score-2-answer', function (req, res) {
-  // Get the answer from session data
-  // The name between the quotes is the same as the 'name' attribute on the input elements
-  // However in JavaScript we can't use hyphens in variable names
 
   let meetScore = req.session.data['evidence-score']
 
@@ -33,9 +121,6 @@ router.post('/evidence-score-2-answer', function (req, res) {
 })
 
 router.post('/evidence-score-3-answer', function (req, res) {
-  // Get the answer from session data
-  // The name between the quotes is the same as the 'name' attribute on the input elements
-  // However in JavaScript we can't use hyphens in variable names
 
   let meetScore = req.session.data['evidence-score']
 

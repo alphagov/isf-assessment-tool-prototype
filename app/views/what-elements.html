@@ -10,16 +10,16 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="/what-evidence" method="post" novalidate>
+      <form action="/what-elements-answer" method="post" novalidate>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
         {{ govukCheckboxes({
-          idPrefix: "what-checks",
-          name: "what-checks",
+          idPrefix: "elements",
+          name: "elements",
           fieldset: {
             legend: {
-              text: "What checks?",
+              text: "What sort of things does your identity solution check?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--xl"
             }
@@ -29,24 +29,28 @@
           },
           items: [
             {
-              value: "carcasses",
-              text: "A"
+              value: "A",
+              text: "It checks evidence exists of that person's identity"
             },
             {
-              value: "mines",
-              text: "B"
+              value: "B",
+              text: "It checks the evidence is genuine and valid"
             },
             {
-              value: "farm",
-              text: "C"
+              value: "C",
+              text: "It checks their identity has existed over time"
             },
             {
-              value: "farm",
-              text: "D"
+              value: "D",
+              text: "It checks their identity hasn't been stolen or used fraudulently"
             },
             {
-              value: "farm",
-              text: "E"
+              value: "E",
+              text: "It checks they are the same person the evidence was given to"
+            },
+            {
+              value: "none",
+              text: "It doesn't check any of these things"
             }
           ]
         }) }}
