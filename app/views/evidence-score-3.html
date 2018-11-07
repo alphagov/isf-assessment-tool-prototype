@@ -1,0 +1,61 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Does your evidence meet the criteria for a score of 3?
+      </h1>
+
+      <p>
+        It also contains:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>it includes the person’s full name instead of their initials</li>
+          <li>it includes information that’s unique to that piece of evidence (for example a reference number)</li>
+          <li>the organisation made sure they issued the evidence to the same person who applied for it</li>
+          <li>It must also include a photo or biometric information (such as a fingerprint) that's unique to that person. If it doesn’t have either of these, it must be protected by cryptographic security features instead.</li>
+          <li>If the evidence has any physical components, you must check they can’t be reproduced without using software or equipment that belongs to the organisation that issued it.</li>
+        </ul>
+      </p>
+
+      <br>
+
+      <form action="/evidence-score-3-answer" method="post" novalidate>
+
+        {{ govukRadios({
+          idPrefix: "evidence-score",
+          name: "evidence-score",
+          fieldset: {
+            legend: {
+              text: "Does your evidence meet the above criteria?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "3",
+              text: "Yes"
+            },
+            {
+              value: "2",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+      </form>
+
+    </div>
+
+  {% endblock %}
