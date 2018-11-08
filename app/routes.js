@@ -54,8 +54,14 @@ router.post('/what-evidence-answer', function (req, res) {
 router.post('/check-evidence-answer', function (req, res) {
 
   let element = req.session.data['elements']
+  let evidences = req.session.data['evidences']
 
-  if (element.includes('C')) {
+
+  if (evidences != 0) {
+    res.redirect('/how-check-evidence')
+  }
+
+  else if (element.includes('C')) {
     res.redirect('/how-check-time')
   }
   else if (element.includes('D')) {

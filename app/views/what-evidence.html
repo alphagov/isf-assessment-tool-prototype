@@ -16,7 +16,7 @@
 
         {{ govukCheckboxes({
           idPrefix: "what-evidence",
-          name: "what-evidence",
+          name: "evidences",
           fieldset: {
             legend: {
               text: "What checks?",
@@ -29,15 +29,15 @@
           },
           items: [
             {
-              value: "carcasses",
+              value: "Passport",
               text: "Passport"
             },
             {
-              value: "mines",
+              value: "Driving licence",
               text: "Driving licence"
             },
             {
-              value: "mines",
+              value: "Other",
               text: "Other"
             }
           ]
