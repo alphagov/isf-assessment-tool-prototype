@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+var evidenceCount = 0
+
 // Add your routes here - above the module.exports line
 
 
@@ -51,19 +53,31 @@ router.post('/what-evidence-answer', function (req, res) {
   }
 })
 
+router.get('/how-check-evidence', function (req, res) {
+
+  let evidences = req.session.data['evidences']
+  let evidenceCount = evidences.length -1
+  let evidence = evidences[evidenceCount]
+
+  res.render('how-check-evidence', { 'evidence': evidence })
+})
+
 router.post('/check-evidence-answer', function (req, res) {
 
   let element = req.session.data['elements']
-  let evidences = req.session.data['evidences']
+  let evidenceCount = 0
 
+  // if (evidenceCount >= 0) {
+  //   res.redirect('/how-check-evidence')
+  // }
+  // else if (element.includes('C')) {
+  //   res.redirect('/how-check-time')
+  // }
 
-  if (evidences != 0) {
-    res.redirect('/how-check-evidence')
-  }
-
-  else if (element.includes('C')) {
+  if (element.includes('C')) {
     res.redirect('/how-check-time')
   }
+
   else if (element.includes('D')) {
     res.redirect('/how-check-stolen')
   }

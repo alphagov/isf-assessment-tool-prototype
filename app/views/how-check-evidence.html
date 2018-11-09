@@ -7,38 +7,17 @@
 
 {% block content %}
 
-<!-- List evidence -->
-{% set evidences = data['evidences'] %}
-<!-- Get first evidence -->
-{% set evidence = evidences[0] %}
-<!-- Remove first evidence from array -->
-{% set removeEvidence = evidences.shift() %}
-<!-- List remaining evidence to update in hidden field -->
-{% set evidencesRemaining = evidences %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
       <form action="/check-evidence-answer" method="post" novalidate>
-        <div style="">
-
-          <fieldset class="govuk-fieldset" style="display:none">
-            <div class="govuk-checkboxes">
-              {% for evidence in evidencesRemaining %}
-                <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id={{evidence}} name={{evidences}} type="checkbox" value={{evidence}} checked="true">
-                </div>
-              {% endfor %}
-            </div>
-          </fieldset>
-
-        </div>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
         {{ govukCheckboxes({
           idPrefix: "how-check-evidence",
-          name: evidence,
+          name: evidence+"['check']",
           fieldset: {
             legend: {
               text: "How do you check the "+ evidence+"?",
@@ -67,6 +46,7 @@
         {{ govukButton({
           text: "Save and continue"
         }) }}
+
       </form>
     </div>
   </div>
