@@ -7,6 +7,19 @@
 
 {% block content %}
 
+<!-- set variables -->
+{% if data['passport-checks'] %}
+  {% set passportCheck = data['passport-checks'] %}
+{% else %}
+  {% set passportCheck = "nil" %}
+{% endif %}
+{% if data['driving-licence-checks'] %}
+  {% set licenceCheck = data['driving-licence-checks'] %}
+{% else %}
+  {% set licenceCheck = "nil" %}
+{% endif %}
+{% set elementE = data['element-e'] %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
@@ -21,23 +34,110 @@
           </tr>
         </thead>
         <tbody class="govuk-table__body">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="row">First 6 weeks</th>
-            <td class="govuk-table__cell">£109.80 per week</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="row">Next 33 weeks</th>
-            <td class="govuk-table__cell">£109.80 per week</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="row">Total estimated pay</th>
-            <td class="govuk-table__cell">£4,282.20</td>
-          </tr>
+          {% if data['evidence'].includes('Passport') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">Passport</td>
+              <td class="govuk-table__cell">3</td>
+            </tr>
+          {% endif %}
+          {% if data['evidence'].includes('Passport') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">Passport validity</td>
+              <td class="govuk-table__cell">
+                {% if passportCheck.includes('2') and passportCheck.includes('3') and passportCheck.includes('4') %}
+                  4
+                {% elif passportCheck.includes('2') and ( passportCheck.includes('3') or passportCheck.includes('4') ) %}
+                  3
+                {% elif passportCheck.includes('2') or passportCheck.includes('3') or passportCheck.includes('4') %}
+                  2
+                {% elif passportCheck.includes('1')%}
+                  1
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+          {% if data['evidence'].includes('Driving licence') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">Driving licence</td>
+              <td class="govuk-table__cell">3</td>
+            </tr>
+          {% endif %}
+          {% if data['evidence'].includes('Driving licence') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">Driving licence validity</td>
+              <td class="govuk-table__cell">
+                {% if licenceCheck.includes('2') and licenceCheck.includes('3') %}
+                  3
+                {% elif licenceCheck.includes('2') or licenceCheck.includes('3') %}
+                  2
+                {% elif licenceCheck.includes('1') %}
+                  1
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
         </tbody>
       </table>
 
-      {{ data["evidence-score"] }}
-      <img src="../../public/images/chart.png" alt="result" width="100%">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Other checks</th>
+            <th class="govuk-table__header" scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+          {% if elementE != "n/a" %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">History</td>
+              <td class="govuk-table__cell">
+                {% if elementE.includes('90') %}
+                  1
+                {% elif elementE.includes('180') %}
+                  2
+                {% elif elementE.includes('405') %}
+                  3
+                {% elif elementE.includes('1080') %}
+                  4
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+          {% if data['element-d-a'] != "no" %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">Fraud</td>
+              <td class="govuk-table__cell">
+                {% if data['element-d-b'] == "no" %}
+                  1
+                {% elif data['element-d-c'] == "1" %}
+                  3
+                {% else %}
+                  4
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+
+          {% if data['element-c-a'] != "no" %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">Verification</td>
+              <td class="govuk-table__cell">
+                {% if (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
+                  3
+                {% elif data['element-c-b'].includes('1') or data['element-c-b'].includes('2') or data['element-c-b'].includes('3') %}
+                  2
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+
+
+        </tbody>
+      </table>
+
+
+      <!-- <img src="../../public/images/chart.png" alt="result" width="100%"> -->
 
 
     </div>

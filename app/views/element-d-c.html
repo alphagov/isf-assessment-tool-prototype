@@ -12,9 +12,9 @@
 
       <form action="/element-c-a" method="post" novalidate>
 
-        {% from "checkboxes/macro.njk" import govukCheckboxes %}
+        {% from "radios/macro.njk" import govukRadios %}
 
-        {{ govukCheckboxes({
+        {{ govukRadios({
           idPrefix: "element-d-c",
           name: "element-d-c",
           fieldset: {
@@ -25,7 +25,7 @@
             }
           },
           hint: {
-            text: "Select all that apply."
+            text: "Select the option that best describes the data source your service uses."
           },
           items: [
             {

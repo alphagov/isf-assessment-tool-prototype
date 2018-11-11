@@ -10,7 +10,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="/element-c-a-answer" method="post" novalidate>
+      <form action="/result" method="post" novalidate>
 
         <h1 class="govuk-heading-xl">How does your service check the person matches the identity on the evidence?</h1>
 
@@ -24,8 +24,8 @@
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
         {{ govukCheckboxes({
-          idPrefix: "element-c-a",
-          name: "element-c-a",
+          idPrefix: "element-c-b",
+          name: "element-c-b",
           fieldset: {
             legend: {
               text: "",

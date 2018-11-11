@@ -19,7 +19,7 @@ router.post('/what-evidence-answer', function (req, res) {
     res.redirect('/other-evidence-1-a')
   }
   else {
-    res.redirect('/')
+    res.redirect('/element-e')
   }
 })
 
@@ -34,7 +34,7 @@ router.post('/passport-answer', function (req, res) {
     res.redirect('/other-evidence-1-a')
   }
   else {
-    res.redirect('/')
+    res.redirect('/element-e')
   }
 })
 
@@ -46,7 +46,7 @@ router.post('/driving-licence-answer', function (req, res) {
     res.redirect('/other-evidence-1-a')
   }
   else {
-    res.redirect('/')
+    res.redirect('/element-e')
   }
 })
 
@@ -167,7 +167,7 @@ router.post('/element-d-b-answer', function (req, res) {
     res.redirect('/element-d-c')
   }
   else {
-    res.redirect('/element-c')
+    res.redirect('/element-c-a')
   }
 })
 
