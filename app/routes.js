@@ -5,163 +5,205 @@ var evidenceCount = 0
 
 // Add your routes here - above the module.exports line
 
-
-
-router.post('/what-elements-answer', function (req, res) {
-
-  let element = req.session.data['elements']
-
-  if (element.includes('A')) {
-    res.redirect('/what-evidence')
-  }
-  else if (element.includes('B')) {
-    res.redirect('/how-check-evidence')
-  }
-  else if (element.includes('C')) {
-    res.redirect('/how-check-time')
-  }
-  else if (element.includes('D')) {
-    res.redirect('/how-check-stolen')
-  }
-  else if (element.includes('E')) {
-    res.redirect('/how-check-person')
-  }
-  else {
-    res.redirect('/alternatives')
-  }
-})
-
-
 router.post('/what-evidence-answer', function (req, res) {
 
-  let element = req.session.data['elements']
+  let evidence = req.session.data['evidence']
 
-  if (element.includes('B')) {
-    res.redirect('/how-check-evidence')
+  if (evidence.includes('Passport')) {
+    res.redirect('/passport')
   }
-  else if (element.includes('C')) {
-    res.redirect('/how-check-time')
+  else if (evidence.includes('Driving licence')) {
+    res.redirect('driving-licence')
   }
-  else if (element.includes('D')) {
-    res.redirect('/how-check-stolen')
+  else if (evidence.includes('Other')) {
+    res.redirect('/other-evidence-1-a')
   }
-  else if (element.includes('E')) {
-    res.redirect('/how-check-person')
+  else {
+    res.redirect('/')
+  }
+})
+
+router.post('/passport-answer', function (req, res) {
+
+  let evidence = req.session.data['evidence']
+
+  if (evidence.includes('Driving licence')) {
+    res.redirect('driving-licence')
+  }
+  else if (evidence.includes('Other')) {
+    res.redirect('/other-evidence-1-a')
+  }
+  else {
+    res.redirect('/')
+  }
+})
+
+router.post('/driving-licence-answer', function (req, res) {
+
+  let evidence = req.session.data['evidence']
+
+  if (evidence.includes('Other')) {
+    res.redirect('/other-evidence-1-a')
+  }
+  else {
+    res.redirect('/')
+  }
+})
+
+
+router.post('/other-evidence-1-a-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-a']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-b')
+  }
+  else {
+    res.redirect('/')
+  }
+})
+
+router.post('/other-evidence-1-b-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-b']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-c')
+  }
+  else {
+    res.redirect('/other-evidence-1')
+  }
+})
+
+router.post('/other-evidence-1-c-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-c']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-d')
+  }
+  else {
+    res.redirect('/other-evidence-1-e')
+  }
+})
+
+router.post('/other-evidence-1-d-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-d']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-f')
+  }
+  else {
+    res.redirect('/other-evidence-1')
+  }
+})
+
+router.post('/other-evidence-1-e-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-e']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-f')
+  }
+  else {
+    res.redirect('/other-evidence-1')
+  }
+})
+
+router.post('/other-evidence-1-f-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-f']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-g')
+  }
+  else {
+    res.redirect('/other-evidence-1')
+  }
+})
+
+router.post('/other-evidence-1-g-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-g']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-h')
+  }
+  else {
+    res.redirect('/other-evidence-1')
+  }
+})
+
+router.post('/other-evidence-1-h-answer', function (req, res) {
+
+  let answer = req.session.data['other-evidence-1-g']
+
+  if (answer === "yes") {
+    res.redirect('/other-evidence-1-i')
+  }
+  else {
+    res.redirect('/other-evidence-1')
+  }
+})
+
+router.post('/element-d-a-answer', function (req, res) {
+
+  let answer = req.session.data['element-d-a']
+
+  if (answer === "yes") {
+    res.redirect('/element-d-b')
+  }
+  else {
+    res.redirect('/element-c-a')
+  }
+})
+
+router.post('/element-d-b-answer', function (req, res) {
+
+  let answer = req.session.data['element-d-b']
+
+  if (answer === "yes") {
+    res.redirect('/element-d-c')
+  }
+  else {
+    res.redirect('/element-c')
+  }
+})
+
+router.post('/element-c-a-answer', function (req, res) {
+
+  let answer = req.session.data['element-c-a']
+
+  if (answer === "yes") {
+    res.redirect('/element-c-b')
   }
   else {
     res.redirect('/result')
   }
 })
 
-router.get('/how-check-evidence', function (req, res) {
+router.post('/other-evidence-1-answer', function (req, res) {
 
-  let evidences = req.session.data['evidences']
-  let evidenceCount = evidences.length -1
-  let evidence = evidences[evidenceCount]
+  let evidence = req.session.data['other-count']
 
-  res.render('how-check-evidence', { 'evidence': evidence })
-})
-
-router.post('/check-evidence-answer', function (req, res) {
-
-  let element = req.session.data['elements']
-  let evidenceCount = 0
-
-  // if (evidenceCount >= 0) {
-  //   res.redirect('/how-check-evidence')
-  // }
-  // else if (element.includes('C')) {
-  //   res.redirect('/how-check-time')
-  // }
-
-  if (element.includes('C')) {
-    res.redirect('/how-check-time')
-  }
-
-  else if (element.includes('D')) {
-    res.redirect('/how-check-stolen')
-  }
-  else if (element.includes('E')) {
-    res.redirect('/how-check-person')
+  if (evidence >= 2) {
+    res.redirect('/other-evidence-2')
   }
   else {
-    res.redirect('/result')
+    res.redirect('/element-e')
   }
 })
 
-router.post('/check-time-answer', function (req, res) {
+router.post('/other-evidence-2-answer', function (req, res) {
 
-  let element = req.session.data['elements']
+  let evidence = req.session.data['other-count']
 
-  if (element.includes('D')) {
-    res.redirect('/how-check-stolen')
-  }
-  else if (element.includes('E')) {
-    res.redirect('/how-check-person')
+  if (evidence >= 3) {
+    res.redirect('/other-evidence-3')
   }
   else {
-    res.redirect('/result')
-  }
-})
-
-router.post('/check-fraud-answer', function (req, res) {
-
-  let element = req.session.data['elements']
-
-  if (element.includes('E')) {
-    res.redirect('/how-check-person')
-  }
-  else {
-    res.redirect('/result')
-  }
-})
-
-
-// Element A scores
-router.post('/evidence-score-1-answer', function (req, res) {
-
-  let meetScore = req.session.data['evidence-score']
-
-  if (meetScore === '0') {
-    res.redirect('/result')
-  } else {
-    res.redirect('/evidence-score-2')
-  }
-})
-
-router.post('/evidence-score-2-answer', function (req, res) {
-
-  let meetScore = req.session.data['evidence-score']
-
-  if (meetScore === '1') {
-    res.redirect('/result')
-  } else {
-    res.redirect('/evidence-score-3')
-  }
-})
-
-router.post('/evidence-score-3-answer', function (req, res) {
-
-  let meetScore = req.session.data['evidence-score']
-
-  if (meetScore === '2') {
-    res.redirect('/result')
-  } else {
-    res.redirect('/evidence-score-4')
-  }
-})
-
-router.post('/evidence-score-4-answer', function (req, res) {
-  // Get the answer from session data
-  // The name between the quotes is the same as the 'name' attribute on the input elements
-  // However in JavaScript we can't use hyphens in variable names
-
-  let evidenceCount = req.session.data['evidence-count']
-
-  if (evidenceCount >= '1') {
-    res.redirect('/evidence-score-1')
-  } else {
-    res.redirect('/result')
+    res.redirect('/')
   }
 })
 

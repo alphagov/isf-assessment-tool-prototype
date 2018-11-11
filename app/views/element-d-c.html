@@ -10,16 +10,16 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="/check-fraud-answer" method="post" novalidate>
+      <form action="/element-c-a" method="post" novalidate>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
         {{ govukCheckboxes({
-          idPrefix: "how-check-stolen",
-          name: "how-check-stolen",
+          idPrefix: "element-d-c",
+          name: "element-d-c",
           fieldset: {
             legend: {
-              text: "How do you check the evidence isnt stolen?",
+              text: "Which data source does your service use?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--xl"
             }
@@ -29,19 +29,16 @@
           },
           items: [
             {
-              value: "carcasses",
-              text: "A"
+              value: "1",
+              text: "A reliable and authoritative source that's independent (either separate to the part of your organisation that checks the person's identity or part of a different organisation)"
             },
             {
-              value: "mines",
-              text: "B"
-            },
-            {
-              value: "mines",
-              text: "C"
+              value: "2",
+              text: "More than one independent, reliable and authoritative source"
             }
           ]
         }) }}
+
         {{ govukButton({
           text: "Save and continue"
         }) }}

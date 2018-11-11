@@ -1,0 +1,63 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/element-c-a-answer" method="post" novalidate>
+
+        <h1 class="govuk-heading-xl">How does your service check the person matches the identity on the evidence?</h1>
+
+        <p>
+          Asking them questions that only the person they're claiming to be would know can help you be sure they are who they say they are.
+        </p>
+        <p>
+          The questions could be about things like their financial activity.
+        </p>
+
+        {% from "checkboxes/macro.njk" import govukCheckboxes %}
+
+        {{ govukCheckboxes({
+          idPrefix: "element-c-a",
+          name: "element-c-a",
+          fieldset: {
+            legend: {
+              text: "",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          hint: {
+            text: "Select all that apply"
+          },
+          items: [
+            {
+              value: "1",
+              text: "It makes sure the person physically matches the photo on a genuine piece of evidence (you can check this either in person or remotely)"
+            },
+            {
+              value: "2",
+              text: "It makes sure the person's biometric information matches what's on a genuine piece of evidence (you can do the match using facial, fingerprint or iris recognition software)"
+            },
+            {
+              value: "3",
+              text: "It asks the person to complete multiple tasks that only the person they're claiming to be would be able to do",
+              hint: "You can make a small payment (such as 1p) into the person's bank account. They will need to sign in to their account and give you the code that's the reference for that payment. If they can give you the code, it will prove they control of and access to that account."
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

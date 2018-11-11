@@ -13,13 +13,26 @@
       <form action="/what-evidence-answer" method="post" novalidate>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
+        {% from "input/macro.njk" import govukInput %}
+
+        {% set otherHTML %}
+        {{ govukInput({
+          id: "other-count",
+          name: "other-count",
+          classes: "govuk-input--width-2",
+          label: {
+            text: "How many pieces of evidence do you collect?"
+          }
+        }) }}
+        {% endset -%}
+
 
         {{ govukCheckboxes({
           idPrefix: "what-evidence",
-          name: "evidences",
+          name: "evidence",
           fieldset: {
             legend: {
-              text: "What checks?",
+              text: "What kind of evidence does your service collect?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--xl"
             }
@@ -30,18 +43,22 @@
           items: [
             {
               value: "Passport",
-              text: "Passport"
+              text: "UK passport"
             },
             {
               value: "Driving licence",
-              text: "Driving licence"
+              text: "UK driving licence"
             },
             {
               value: "Other",
-              text: "Other"
+              text: "Another piece of evidence",
+              conditional: {
+                html: otherHTML
+              }
             }
           ]
         }) }}
+
         {{ govukButton({
           text: "Save and continue"
         }) }}

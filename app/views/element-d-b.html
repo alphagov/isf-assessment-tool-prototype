@@ -1,0 +1,61 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/element-d-b-answer" method="post" novalidate>
+
+        <h1 class="govuk-heading-xl">How does your service check the person's identity hasn't been stolen or used fraudulently?</h1>
+
+        <p>
+          Does it also check the following:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>the identity does not belong to someone who has died</li>
+            <li>the person they're claiming to be is known by an organisation that should have a record of</li>
+            <li>that person (for example an Electoral Registration Office in a local authority)</li>
+            <li>the person they're claiming to be is not likely to be impersonated (for example if they’re a public figure that’s currently in the news)</li>
+          </ul>
+        </p>
+        <p class="govuk-!-margin-bottom-6">
+          You must check this with a reliable and authoritative data source.
+        </p>
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "element-d-b",
+          name: "element-d-b",
+          fieldset: {
+            legend: {
+              text: "",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

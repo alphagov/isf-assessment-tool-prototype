@@ -1,0 +1,62 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/element-d-a-answer" method="post" novalidate>
+
+        <h1 class="govuk-heading-xl">How does your service check the person’s identity hasn’t been stolen or used fraudulently?</h1>
+
+        <p>
+          Does it check the person:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>has not had their details stolen (even if those details have not been used fraudulently yet)</li>
+            <li>has not been a victim of identity theft</li>
+            <li>is not a known fraudulent identity</li>
+            <li>has not had any information unique to a piece of evidence they have (such as a reference number) stolen and used fraudulently</li>
+          </ul>
+        </p>
+
+        <p class="govuk-!-margin-bottom-6">
+          You must check this with a reliable and authoritative data source.
+        </p>
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "element-d-a",
+          name: "element-d-a",
+          fieldset: {
+            legend: {
+              text: "",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          items: [
+          {
+            value: "yes",
+            text: "Yes"
+          },
+          {
+            value: "no",
+            text: "No"
+          }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

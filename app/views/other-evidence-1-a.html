@@ -1,0 +1,61 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/other-evidence-1-a-answer" method="post" novalidate>
+
+        <h1 class="govuk-heading-xl">What kind of information is on the evidence you collect?</h1>
+
+        <p>
+          The evidence should contain the person’s name and some information that’s unique to them, such as:
+          <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
+            <li>their address</li>
+            <li>their date or place of birth</li>
+            <li>their photo</li>
+            <li>a reference number</li>
+          </ul>
+        </p>
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "other-evidence-1-a",
+          name: "other-evidence-1-a",
+          fieldset: {
+            legend: {
+              text: "Does the evidence you check have this kind of information on it?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "Select all that apply."
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "no"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

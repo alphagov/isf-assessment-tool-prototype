@@ -1,0 +1,56 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/other-evidence-1" method="post" novalidate>
+
+        <h1 class="govuk-heading-xl">How is the evidence protected and issued?</h1>
+
+        <p>
+          Are both of the following true:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>the evidence contains biometric information that’s protected by cryptographic security features</li>
+            <li>the organisation compared the person to another image of them before they issued the evidence</li>
+          </ul>
+        </p>
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "other-evidence-1-i",
+          name: "other-evidence-1-i",
+          fieldset: {
+            legend: {
+              text: "",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "no"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

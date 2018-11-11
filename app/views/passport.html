@@ -1,0 +1,57 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/passport-answer" method="post" novalidate>
+
+        {% from "checkboxes/macro.njk" import govukCheckboxes %}
+
+        {{ govukCheckboxes({
+          idPrefix: "passport-checks",
+          name: "passport-checks",
+          fieldset: {
+            legend: {
+              text: "What do you do when you check a UK passport?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--xl"
+            }
+          },
+          hint: {
+            text: "Select all that apply."
+          },
+          items: [
+            {
+              value: "1",
+              text: "Make sure the person's details are the same as those held by HM Passport Office (HMPO) or another trusted organisation"
+            },
+            {
+              value: "2",
+              text: "Make sure the person's details and any other details (such as the passport number or expiry date) are the same as those held by HMPO or another trusted organisation"
+            },
+            {
+              value: "3",
+              text: "Ask trained personnel (for example someone trained by the National Document Fraud Unit) to make sure the passport and any security features (such as the holograms or watermarks) are genuine"
+            },
+            {
+              value: "4",
+              text: "Look at the chip on the passport to make sure it's genuine"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

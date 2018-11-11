@@ -1,0 +1,74 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/element-d-a" method="post" novalidate>
+
+        <h1 class="govuk-heading-xl">Does your service check if the person has interacted with other people or organisations?</h1>
+
+        <p>
+          Some examples of interactions that can prove someone’s identity include:
+          <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
+            <li>credit card transactions</li>
+            <li>student loan repayments</li>
+            <li>mortgage payments</li>
+            <li>gas or electricity account payments</li>
+            <li>posts on social media</li>
+          </ul>
+        </p>
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "element-e",
+          name: "element-e",
+          fieldset: {
+            legend: {
+              text: "Over what period of time does your service look for interactions?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "90",
+              text: "90 days"
+            },
+            {
+              value: "180",
+              text: "180 days"
+            },
+            {
+              value: "405",
+              text: "405 days"
+            },
+            {
+              value: "1080",
+              text: "1,080 days"
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "n/a",
+              text: "It doesn't look for interactions "
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
