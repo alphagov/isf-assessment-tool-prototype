@@ -117,50 +117,50 @@
         </thead>
         <tbody class="govuk-table__body">
 
-          {% if elementE != "n/a" %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row">History</td>
-              <td class="govuk-table__cell">
-                {% if elementE.includes('90') %}
-                  1
-                {% elif elementE.includes('180') %}
-                  2
-                {% elif elementE.includes('405') %}
-                  3
-                {% elif elementE.includes('1080') %}
-                  4
-                {% endif %}
-              </td>
-            </tr>
-          {% endif %}
-          {% if data['element-d-a'] != "no" %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row">Fraud</td>
-              <td class="govuk-table__cell">
-                {% if data['element-d-b'] == "no" %}
-                  1
-                {% elif data['element-d-c'] == "1" %}
-                  3
-                {% else %}
-                  4
-                {% endif %}
-              </td>
-            </tr>
-          {% endif %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" scope="row">History</td>
+            <td class="govuk-table__cell">
+              {% if elementE.includes('n/a') %}
+               No history check
+              {% elif elementE.includes('90') %}
+                1
+              {% elif elementE.includes('180') %}
+                2
+              {% elif elementE.includes('405') %}
+                3
+              {% elif elementE.includes('1080') %}
+                4
+              {% endif %}
+            </td>
+          </tr>
 
-          {% if data['element-c-a'] != "no" %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row">Verification</td>
-              <td class="govuk-table__cell">
-                {% if (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
-                  3
-                {% elif data['element-c-b'].includes('1') or data['element-c-b'].includes('2') or data['element-c-b'].includes('3') %}
-                  2
-                {% endif %}
-              </td>
-            </tr>
-          {% endif %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" scope="row">Fraud</td>
+            <td class="govuk-table__cell">
+              {% if data['element-d-a'] == "no" %}
+                No fraud check
+              {% elif data['element-d-b'] == "no" %}
+                1
+              {% elif data['element-d-c'] == "1" %}
+                3
+              {% else %}
+                4
+              {% endif %}
+            </td>
+          </tr>
 
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" scope="row">Verification</td>
+            <td class="govuk-table__cell">
+              {% if data['element-c-a'] == "no" %}
+               No verification check
+              {% elif (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
+                3
+              {% elif data['element-c-b'].includes('1') or data['element-c-b'].includes('2') or data['element-c-b'].includes('3') %}
+                2
+              {% endif %}
+            </td>
+          </tr>
 
         </tbody>
       </table>

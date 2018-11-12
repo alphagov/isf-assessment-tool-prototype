@@ -12,10 +12,10 @@
 
       <form action="/other-evidence-1-a-answer" method="post" novalidate>
 
-        <h1 class="govuk-heading-xl">What kind of information is on the {{data['evidence-1-name']}}?</h1>
+        <h1 class="govuk-heading-xl">Does the {{data['evidence-1-name']}} contain information that’s unique to the person?</h1>
 
         <p>
-          The evidence should contain the person’s name and some information that’s unique to them, such as:
+          The evidence should contain the person’s name and some information that’s unique to them, like:
           <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
             <li>their address</li>
             <li>their date or place of birth</li>
@@ -31,13 +31,10 @@
           name: "other-evidence-1-a",
           fieldset: {
             legend: {
-              text: "Does the "+data['evidence-1-name']+" have this kind of information on it?",
+              text: "",
               isPageHeading: false,
               classes: "govuk-fieldset__legend--m"
             }
-          },
-          hint: {
-            text: "Select all that apply."
           },
           items: [
             {
