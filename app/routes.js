@@ -16,7 +16,7 @@ router.post('/what-evidence-answer', function (req, res) {
     res.redirect('driving-licence')
   }
   else if (evidence.includes('Other')) {
-    res.redirect('/other-evidence-1-a')
+    res.redirect('/other-evidence-1-name')
   }
   else {
     res.redirect('/element-e')
@@ -31,7 +31,7 @@ router.post('/passport-answer', function (req, res) {
     res.redirect('driving-licence')
   }
   else if (evidence.includes('Other')) {
-    res.redirect('/other-evidence-1-a')
+    res.redirect('/other-evidence-1-name')
   }
   else {
     res.redirect('/element-e')
@@ -43,7 +43,7 @@ router.post('/driving-licence-answer', function (req, res) {
   let evidence = req.session.data['evidence']
 
   if (evidence.includes('Other')) {
-    res.redirect('/other-evidence-1-a')
+    res.redirect('/other-evidence-1-name')
   }
   else {
     res.redirect('/element-e')
@@ -188,7 +188,7 @@ router.post('/other-evidence-1-answer', function (req, res) {
   let evidence = req.session.data['other-count']
 
   if (evidence >= 2) {
-    res.redirect('/other-evidence-2')
+    res.redirect('/other-evidence-2-name')
   }
   else {
     res.redirect('/element-e')

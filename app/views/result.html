@@ -13,12 +13,21 @@
 {% else %}
   {% set passportCheck = "nil" %}
 {% endif %}
+
 {% if data['driving-licence-checks'] %}
   {% set licenceCheck = data['driving-licence-checks'] %}
 {% else %}
   {% set licenceCheck = "nil" %}
 {% endif %}
+
 {% set elementE = data['element-e'] %}
+
+{% if data['other-count'] == "1" %}
+  {% set evidence1 = data['other-evidence-1-checks'] %}
+{% else %}
+  {% set evidence1 = "nil" %}
+{% endif %}
+
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -71,6 +80,26 @@
                 {% elif licenceCheck.includes('2') or licenceCheck.includes('3') %}
                   2
                 {% elif licenceCheck.includes('1') %}
+                  1
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+          {% if data['other-count'] == "1" %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}}</td>
+              <td class="govuk-table__cell">Laurence will make this work soon :)</td>
+            </tr>
+          {% endif %}
+          {% if data['other-count'] == "1" %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} validity</td>
+              <td class="govuk-table__cell">
+                {% if evidence1.includes('2') and evidence1.includes('3') %}
+                  3
+                {% elif evidence1.includes('2') or evidence1.includes('3') %}
+                  2
+                {% elif evidence1.includes('1') %}
                   1
                 {% endif %}
               </td>
