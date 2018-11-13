@@ -12,13 +12,13 @@
 
       <form action="/other-evidence-1-a" method="post" novalidate>
 
-        <h1 class="govuk-heading-xl">About the other evidence you collect</h1>
+        <h1 class="govuk-heading-l">Tell us about the other evidence you collect</h1>
 
         {% from "input/macro.njk" import govukInput %}
 
         {{ govukInput({
           label: {
-            text: "What is your first piece of other evidence called?"
+            text: "Give your first piece of other evidence a name, for example 'birth certificate'."
           },
           classes: "govuk-input--width-20",
           id: "evidence-1-name",
