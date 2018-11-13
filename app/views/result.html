@@ -32,20 +32,33 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
-        Result
+        How confident you can be in the person’s identity
       </h1>
+
+      <!-- <h2 class="govuk-heading-l">How confident you can be in the person’s identity</h2> -->
+
+      <p style="font-weight:bold">
+        Your service can achieve a high confidence level.
+      </p>
+      <p>
+        This means it lowers the risk of accepting synthetic identities or being attacked by third parties that have stolen other people’s identities.
+      </p>
+      <p>
+        How confident you can be depends on how many pieces of evidence you collect and what score they get for each check.
+      </p>
+
 
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Evidence</th>
+            <th class="govuk-table__header" scope="col">Identity element</th>
             <th class="govuk-table__header" scope="col">Score</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
           {% if data['evidence'].includes('Passport') %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row">Passport</td>
+              <td class="govuk-table__cell" scope="row">Passport strength</td>
               <td class="govuk-table__cell">3</td>
             </tr>
           {% endif %}
@@ -67,7 +80,7 @@
           {% endif %}
           {% if data['evidence'].includes('Driving licence') %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row">Driving licence</td>
+              <td class="govuk-table__cell" scope="row">Driving licence strength</td>
               <td class="govuk-table__cell">3</td>
             </tr>
           {% endif %}
@@ -87,18 +100,18 @@
           {% endif %}
           {% if data['other-count'] == "1" %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}}</td>
+              <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} strength</td>
 
               <td class="govuk-table__cell">
-                {% if data['evidence-1-a'] == "no" %}
+                {% if data['other-evidence-1-a'] == "no" %}
                   0
-                {% elif data['evidence-1-b'] == "no" or  data['evidence-1-b'] == "no" or data['evidence-1-e'] == "no"%}
+                {% elif data['other-evidence-1-b'] == "no" or  data['other-evidence-1-b'] == "no" or data['other-evidence-1-e'] == "no"%}
                   1
-                {% elif data['evidence-1-f'] == "no" or data['evidence-1-g'] == "no" or data['evidence-1-h'] == "no" %}
+                {% elif data['other-evidence-1-f'] == "no" or data['other-evidence-1-g'] == "no" or data['other-evidence-1-h'] == "no" %}
                   2
-                {% elif data['evidence-1-i'] == "no" %}
+                {% elif data['other-evidence-1-i'] == "no" %}
                   3
-                {% elif data['evidence-1-i'] == "yes" %}
+                {% elif data['other-evidence-1-i'] == "yes" %}
                   4
                 {% endif %}
               </td>
@@ -118,17 +131,7 @@
               </td>
             </tr>
           {% endif %}
-        </tbody>
-      </table>
 
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Other checks</th>
-            <th class="govuk-table__header" scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">History</td>
@@ -175,6 +178,32 @@
             </td>
           </tr>
 
+        </tbody>
+      </table>
+
+      <h2 class="govuk-heading-m">Meeting identity evidence profiles</h2>
+      <p>
+        Changing how thoroughly you do each check will give you a different combination of scores. These combinations are also known as 'identity evidence profiles'.
+      </p>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Identity profile</th>
+            <th class="govuk-table__header" scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" scope="row">Passport strength</td>
+            <td class="govuk-table__cell">3</td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" scope="row">Passport validity</td>
+            <td class="govuk-table__cell">
+            </td>
+          </tr>
         </tbody>
       </table>
 
