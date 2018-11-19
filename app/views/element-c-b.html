@@ -5,6 +5,14 @@
   GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
 {% block content %}
 
   <div class="govuk-grid-row">
@@ -12,7 +20,7 @@
 
       <form action="/result" method="post" novalidate>
 
-        <h1 class="govuk-heading-xl">How does your service check the person matches the identity on the evidence?</h1>
+        <h1 class="govuk-heading-l">How does your service check the person matches the identity on the evidence?</h1>
 
         <p>
           Asking them questions that only the person they're claiming to be would know can help you be sure they are who they say they are.
@@ -34,7 +42,7 @@
             }
           },
           hint: {
-            text: "Select all that apply"
+            text: ""
           },
           items: [
             {

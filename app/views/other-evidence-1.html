@@ -5,6 +5,14 @@
   GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
 {% block content %}
 
   <div class="govuk-grid-row">
@@ -19,13 +27,13 @@
           name: "other-evidence-1-checks",
           fieldset: {
             legend: {
-              text: "What do you do when you check the " + data['evidence-1-name'] + " ?",
+              text: "What do you do when you check the " + data['evidence-1-name'] + "?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
           },
           hint: {
-            text: "Select all that apply."
+            text: ""
           },
           items: [
             {

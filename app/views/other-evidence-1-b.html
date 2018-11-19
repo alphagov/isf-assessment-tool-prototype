@@ -5,6 +5,14 @@
   GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
 {% block content %}
 
   <div class="govuk-grid-row">
@@ -12,11 +20,11 @@
 
       <form action="/other-evidence-1-b-answer" method="post" novalidate>
 
-        <h1 class="govuk-heading-l">Information on the {{data['evidence-1-name']}} and how it's issued</h1>
+        <h1 class="govuk-heading-l">Information on the {{data['evidence-1-name']}} and how it’s issued</h1>
 
         <p>
           Are all of the following true:
-          <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
+          <ul class="govuk-list govuk-list--bullet">
             <li>the evidence includes the person's full name - not any pseudonyms or aliases</li>
             <li>the evidence includes information that's unique to that piece of evidence or the person (for example a reference number or a photo of them)</li>
             <li>the organisation checked the person’s identity when they issued the evidence</li>

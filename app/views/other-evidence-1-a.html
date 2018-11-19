@@ -5,6 +5,14 @@
   GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
 {% block content %}
 
   <div class="govuk-grid-row">
@@ -16,7 +24,7 @@
 
         <p>
           It should contain the person’s name and some information that’s unique to them, like:
-          <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
+          <ul class="govuk-list govuk-list--bullet">
             <li>their address</li>
             <li>their date or place of birth</li>
             <li>their photo</li>
