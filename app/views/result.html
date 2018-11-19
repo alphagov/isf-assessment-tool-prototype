@@ -5,6 +5,26 @@
   GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  {% from "breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+  {{ govukBreadcrumbs({
+  items: [
+    {
+      text: "Identity standard",
+      href: "#"
+    },{
+      text: "Assess how your identity service meets the standard",
+      href: "/index"
+    },
+    {
+      text: "How confident you can be in the person’s identity"
+    }
+  ]
+  }) }}
+
+{% endblock %}
+
 {% block content %}
 
 <!-- set variables -->
@@ -221,6 +241,8 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
 
       <h2 class="govuk-heading-m">Strengths</h2>
 
