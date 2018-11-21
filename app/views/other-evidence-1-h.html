@@ -12,10 +12,10 @@
 
       <form action="/other-evidence-1-h-answer" method="post" novalidate>
 
-        <h1 class="govuk-heading-l">Does the {{data['evidence-1-name']}} have any physical components?</h1>
+        <h1 class="govuk-heading-l">Is the {{data['evidence-1-name']}} a physical document?</h1>
 
         <p>
-          If it does, you must check they can’t be reproduced without using software or equipment that belongs to the organisation that issued it.
+          If it does, you must make sure it cannot be reproduced without using software or equipment that belongs to the organisation that issued it.
         </p>
 
         {% from "radios/macro.njk" import govukRadios %}
@@ -37,7 +37,7 @@
             },
             {
               value: "no",
-              text: "no"
+              text: "No"
             }
           ]
         }) }}

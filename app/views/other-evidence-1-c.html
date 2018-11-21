@@ -15,7 +15,7 @@
         <h1 class="govuk-heading-l">Does the {{data['evidence-1-name']}} include any digital information?</h1>
 
         <p>
-          Your piece will include digital information if it's something like a signed PDF or a card with a chip.
+          The evidence will include digital information if it's something like a card with a chip.
         </p>
 
         {% from "radios/macro.njk" import govukRadios %}
@@ -37,7 +37,7 @@
             },
             {
               value: "no",
-              text: "no"
+              text: "No"
             }
           ]
         }) }}

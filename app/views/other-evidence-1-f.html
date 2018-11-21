@@ -12,14 +12,17 @@
 
       <form action="/other-evidence-1-f-answer" method="post" novalidate>
 
-        <h1 class="govuk-heading-l">Information on the {{data['evidence-1-name']}} and how it's issued</h1>
+        <h1 class="govuk-heading-l">Did the organisation make sure the {{data['evidence-1-name']}} was received by the person who applied for it?</h1>
 
         <p>
-          Are all of the following true:
+          The organisation can do this by asking for a signature when the evidence is the delivered.
+        </p>
+
+        <p>
+          The evidence must also include both:
           <ul class="govuk-list govuk-list--bullet">
-            <li>the evidence includes the person’s full name instead of their initials</li>
-            <li>the evidence includes information that’s unique to it (for example a reference number)</li>
-            <li>the organisation made sure they issued the evidence to the same person who applied for it</li>
+            <li>the person’s full name instead of their initials</li>
+            <li>information that’s unique to it (for example a reference number)</li>
           </ul>
         </p>
 
@@ -42,7 +45,7 @@
             },
             {
               value: "no",
-              text: "no"
+              text: "No"
             }
           ]
         }) }}

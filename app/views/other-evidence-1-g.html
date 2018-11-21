@@ -12,14 +12,14 @@
 
       <form action="/other-evidence-1-g-answer" method="post" novalidate>
 
-        <h1 class="govuk-heading-l">Information on the {{data['evidence-1-name']}}</h1>
+        <h1 class="govuk-heading-l">Did the organisation check the person looks like another image?</h1>
 
         <p>
-          Does the evidence have either:
-          <ul class="govuk-list govuk-list--bullet">
-            <li>a photo or biometric information (such as a fingerprint) that's unique to that person</li>
-            <li>cryptographic security features that can be used to identify the person who owns the evidence</li>
-          </ul>
+          The image must have come from a ‘trusted’ source. This is another organisation that has been given information by the organisation that issued the evidence.
+        </p>
+
+        <p>
+          The evidence must contain biometric and personal information that's protected by cryptographic security features.
         </p>
 
         {% from "radios/macro.njk" import govukRadios %}
@@ -41,7 +41,7 @@
             },
             {
               value: "no",
-              text: "no"
+              text: "No"
             }
           ]
         }) }}

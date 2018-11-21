@@ -12,14 +12,10 @@
 
       <form action="/other-evidence-1" method="post" novalidate>
 
-        <h1 class="govuk-heading-l">Security features on the {{data['evidence-1-name']}} and how it's issued</h1>
+        <h1 class="govuk-heading-l">Did the organisation compare the person to another image before they issued the {{data['evidence-1-name']}}?</h1>
 
         <p>
-          Are both of the following true:
-          <ul class="govuk-list govuk-list--bullet">
-            <li>the evidence contains biometric information that’s protected by cryptographic security features</li>
-            <li>the organisation compared the person to another image of them before they issued the evidence</li>
-          </ul>
+          The evidence must contain biometric information that's protected by cryptographic security features.
         </p>
 
         {% from "radios/macro.njk" import govukRadios %}
@@ -41,7 +37,7 @@
             },
             {
               value: "no",
-              text: "no"
+              text: "No"
             }
           ]
         }) }}
