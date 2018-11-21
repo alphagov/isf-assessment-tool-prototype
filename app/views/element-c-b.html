@@ -12,14 +12,7 @@
 
       <form action="/result" method="post" novalidate>
 
-        <h1 class="govuk-heading-xl">How does your service check the person matches the identity on the evidence?</h1>
-
-        <p>
-          Asking them questions that only the person they're claiming to be would know can help you be sure they are who they say they are.
-        </p>
-        <p>
-          The questions could be about things like their financial activity.
-        </p>
+        <h1 class="govuk-heading-l">How does you check they're the same person that's shown on the evidence?</h1>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
@@ -39,15 +32,15 @@
           items: [
             {
               value: "1",
-              text: "It makes sure the person physically matches the photo on a genuine piece of evidence (you can check this either in person or remotely)"
+              text: "Check they physically match the photo on a genuine piece of evidence (you can do this either in person or remotely)"
             },
             {
               value: "2",
-              text: "It makes sure the person's biometric information matches what's on a genuine piece of evidence (you can do the match using facial, fingerprint or iris recognition software)"
+              text: "Check their biometric information matches what's on a genuine piece of evidence (you can do this with facial, fingerprint or iris recognition software)"
             },
             {
               value: "3",
-              text: "It asks the person to complete multiple tasks that only the person they're claiming to be would be able to do",
+              text: "Ask them to complete multiple tasks that only the person they're claiming to be would be able to do",
               hint: "You can make a small payment (such as 1p) into the person's bank account. They will need to sign in to their account and give you the code that's the reference for that payment. If they can give you the code, it will prove they control of and access to that account."
             }
           ]
