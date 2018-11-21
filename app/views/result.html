@@ -72,14 +72,112 @@
 {% set C3 = "You've checked the person can complete tasks that only the person they're claiming to be can do." %}
 {% set C4 = "You've checked that their biometric information matches what’s on the evidence." %}
 
+
+<!-- Set user's results based on answers -->
+
+{% if data['evidence'].includes('Passport') %}
+
+  {% set elementAPassportScore = 3 %}
+  {% set elementAPassportDescription = A3 %}
+
+  {% if passportCheck.includes('2') and passportCheck.includes('3') and passportCheck.includes('4') %}
+    {% set elementBPassportScore = 4 %}
+    {% set elementBPassportDescription = B4 %}
+  {% elif passportCheck.includes('2') and ( passportCheck.includes('3') or passportCheck.includes('4') ) %}
+    {% set elementBPassportScore = 3 %}
+    {% set elementBPassportDescription = B3 %}
+  {% elif passportCheck.includes('2') or passportCheck.includes('3') or passportCheck.includes('4') %}
+    {% set elementBPassportScore = 2 %}
+    {% set elementBPassportDescription = B2 %}
+  {% elif passportCheck.includes('1')%}
+    {% set elementBPassportScore = 1 %}
+    {% set elementBPassportDescription = B1 %}
+  {% endif %}
+
+{% endif %}
+
+
+{% if data['evidence'].includes('Driving licence') %}
+
+    {% set elementADrivingLicenceScore = 3 %}
+    {% set elementADrivingLicenceDescription = A3 %}
+
+    {% if licenceCheck.includes('2') and licenceCheck.includes('3') %}
+      {% set elementBDrivingLicenceScore = 3 %}
+      {% set elementBDrivingLicenceDescription = 3 %}
+    {% elif licenceCheck.includes('2') or licenceCheck.includes('3') %}
+      {% set elementBDrivingLicenceScore = 2 %}
+      {% set elementBDrivingLicenceDescription = B2 %}
+    {% elif licenceCheck.includes('1') %}
+      {% set elementBDrivingLicenceScore = 1 %}
+      {% set elementBDrivingLicenceDescription = B1 %}
+    {% endif %}
+
+{% endif %}
+
+
+{% if data['other-count'] == "1" %}
+
+    {% if data['other-evidence-1-a'] == "no" %}
+      {% set elementAOther1Score = 0 %}
+      {% set elementAOther1Description = A0 %}
+    {% elif data['other-evidence-1-b'] == "no" or  data['other-evidence-1-b'] == "no" or data['other-evidence-1-e'] == "no"%}
+      {% set elementAOther1Score = 1 %}
+      {% set elementAOther1Description = A1 %}
+    {% elif data['other-evidence-1-f'] == "no" or data['other-evidence-1-g'] == "no" or data['other-evidence-1-h'] == "no" %}
+      {% set elementAOther1Score = 2 %}
+      {% set elementAOther1Description = A2 %}
+    {% elif data['other-evidence-1-i'] == "no" %}
+      {% set elementAOther1Score = 3 %}
+      {% set elementAOther1Description = A3 %}
+    {% elif data['other-evidence-1-i'] == "yes" %}
+      {% set elementAOther1Score = 4 %}
+      {% set elementAOther1Description = A4 %}
+    {% endif %}
+
+    {% if evidence1.includes('2') and evidence1.includes('3') %}
+      {% set elementBOther1Score = 3 %}
+      {% set elementBOther1Description = B3 %}
+    {% elif evidence1.includes('2') or evidence1.includes('3') %}
+      {% set elementBOther1Score = 2 %}
+      {% set elementBOther1Description = B2 %}
+    {% elif evidence1.includes('1') %}
+      {% set elementBOther1Score = 1 %}
+      {% set elementBOther1Description = B1 %}
+    {% endif %}
+
+{% endif %}
+
+{% if data['element-e-a'].includes('n/a') %}
+  {% set elementEScore = 0 %}
+  {% set elementEDescription = E0 %}
+{% elif elementE.includes('90') %}
+  {% set elementEScore = 1 %}
+  {% set elementEDescription = E1 %}
+{% elif elementE.includes('180') %}
+  {% set elementEScore = 2 %}
+  {% set elementEDescription = E2 %}
+{% elif elementE.includes('405') %}
+  {% set elementEScore = 3 %}
+  {% set elementEDescription = E3 %}
+{% elif elementE.includes('1080') %}
+  {% set elementEScore = 4 %}
+  {% set elementEDescription = E4 %}
+{% endif %}
+
+
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">
-        How confident you can be in the person’s identity
+        Changem
       </h1>
 
       <p>
-        Each element of your identity check can be scored between 0 and 4, how confident you can be depends on how many pieces of evidence you collect and what score they get for each check.
+        The strength of your check depends on how many pieces of evidence you collect and what score they get for each check.
+      </p>
+      <p>
+        Each element of your identity check can be scored between 0 and 4.
       </p>
     </div>
     <div class="govuk-grid-column-full">
@@ -91,113 +189,53 @@
           <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col">Element</th>
             <th class="govuk-table__header" scope="col">Score</th>
-            <th class="govuk-table__header" scope="col">Risks</th>
+            <th class="govuk-table__header" scope="col">What you do</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
           {% if data['evidence'].includes('Passport') %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">Passport strength</td>
-              <td class="govuk-table__cell">3</td>
-              <td class="govuk-table__cell">{{A3}}</td>
+              <td class="govuk-table__cell">{{elementAPassportScore}}</td>
+              <td class="govuk-table__cell">{{elementAPassportDescription}}</td>
             </tr>
-          {% endif %}
-          {% if data['evidence'].includes('Passport') %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">Passport validity</td>
-              {% if passportCheck.includes('2') and passportCheck.includes('3') and passportCheck.includes('4') %}
-                <td class="govuk-table__cell">4</td>
-                <td class="govuk-table__cell">{{B4}}</td>
-              {% elif passportCheck.includes('2') and ( passportCheck.includes('3') or passportCheck.includes('4') ) %}
-                <td class="govuk-table__cell">3</td>
-                <td class="govuk-table__cell">{{B3}}</td>
-              {% elif passportCheck.includes('2') or passportCheck.includes('3') or passportCheck.includes('4') %}
-                <td class="govuk-table__cell">2</td>
-                <td class="govuk-table__cell">{{B2}}</td>
-              {% elif passportCheck.includes('1')%}
-                <td class="govuk-table__cell">1</td>
-                <td class="govuk-table__cell">{{B1}}</td>
-              {% endif %}
+              <td class="govuk-table__cell">{{elementBPassportScore}}</td>
+              <td class="govuk-table__cell">{{elementBPassportDescription}}</td>
             </tr>
           {% endif %}
+
           {% if data['evidence'].includes('Driving licence') %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">Driving licence strength</td>
-              <td class="govuk-table__cell">3</td>
-              <td class="govuk-table__cell">{{A3}}</td>
+              <td class="govuk-table__cell">{{elementADrivingLicenceScore}}</td>
+              <td class="govuk-table__cell">{{elementADrivingLicenceDescription}}</td>
             </tr>
-          {% endif %}
-          {% if data['evidence'].includes('Driving licence') %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell" scope="row">Driving licence validity</td>
-              {% if licenceCheck.includes('2') and licenceCheck.includes('3') %}
-                <td class="govuk-table__cell">3</td>
-                <td class="govuk-table__cell">{{B3}}</td>
-              {% elif licenceCheck.includes('2') or licenceCheck.includes('3') %}
-                <td class="govuk-table__cell">2</td>
-                <td class="govuk-table__cell">{{B2}}</td>
-              {% elif licenceCheck.includes('1') %}
-                <td class="govuk-table__cell">1</td>
-                <td class="govuk-table__cell">{{B1}}</td>
-              {% endif %}
+              <td class="govuk-table__cell">Driving licence validity</td>
+              <td class="govuk-table__cell">{{elementADrivingLicenceScore}}</td>
+              <td class="govuk-table__cell">{{elementADrivingLicenceDescription}}</td>
             </tr>
           {% endif %}
+
           {% if data['other-count'] == "1" %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} strength</td>
-              {% if data['other-evidence-1-a'] == "no" %}
-                <td class="govuk-table__cell">0</td>
-                <td class="govuk-table__cell">{{A0}}</td>
-              {% elif data['other-evidence-1-b'] == "no" or  data['other-evidence-1-b'] == "no" or data['other-evidence-1-e'] == "no"%}
-                <td class="govuk-table__cell">1</td>
-                <td class="govuk-table__cell">{{A1}}</td>
-              {% elif data['other-evidence-1-f'] == "no" or data['other-evidence-1-g'] == "no" or data['other-evidence-1-h'] == "no" %}
-                <td class="govuk-table__cell">2</td>
-                <td class="govuk-table__cell">{{A2}}</td>
-              {% elif data['other-evidence-1-i'] == "no" %}
-                <td class="govuk-table__cell">3</td>
-                <td class="govuk-table__cell">{{A3}}</td>
-              {% elif data['other-evidence-1-i'] == "yes" %}
-                <td class="govuk-table__cell">4</td>
-                <td class="govuk-table__cell">{{A4}}</td>
-              {% endif %}
+              <td class="govuk-table__cell">{{elementAOther1Score}}</td>
+              <td class="govuk-table__cell">{{elementAOther1Description}}</td>
             </tr>
-          {% endif %}
-          {% if data['other-count'] == "1" %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} validity</td>
-              {% if evidence1.includes('2') and evidence1.includes('3') %}
-                <td class="govuk-table__cell">3</td>
-                <td class="govuk-table__cell">{{B3}}</td>
-              {% elif evidence1.includes('2') or evidence1.includes('3') %}
-                <td class="govuk-table__cell">2</td>
-                <td class="govuk-table__cell">{{B2}}</td>
-              {% elif evidence1.includes('1') %}
-                <td class="govuk-table__cell">1</td>
-                <td class="govuk-table__cell">{{B1}}</td>
-              {% endif %}
+              <td class="govuk-table__cell">{{elementBOther1Score}}</td>
+              <td class="govuk-table__cell">{{elementBOther1Description}}</td>
             </tr>
           {% endif %}
-
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">History</td>
-            {% if data['element-e-a'].includes('n/a') %}
-               <td class="govuk-table__cell">N/A</td>
-               <td class="govuk-table__cell">No history check</td>
-            {% elif elementE.includes('90') %}
-              <td class="govuk-table__cell">1</td>
-              <td class="govuk-table__cell">{{E1}}</td>
-            {% elif elementE.includes('180') %}
-              <td class="govuk-table__cell">2</td>
-              <td class="govuk-table__cell">{{E2}}</td>
-            {% elif elementE.includes('405') %}
-              <td class="govuk-table__cell">3</td>
-              <td class="govuk-table__cell">{{E3}}</td>
-            {% elif elementE.includes('1080') %}
-              <td class="govuk-table__cell">4</td>
-              <td class="govuk-table__cell">{{E4}}</td>
-            {% endif %}
+            <td class="govuk-table__cell">{{elementEScore}}</td>
+            <td class="govuk-table__cell">{{elementEDescription}}</td>
           </tr>
 
           <tr class="govuk-table__row">
@@ -235,6 +273,524 @@
     </div>
     <div class="govuk-grid-column-two-thirds">
 
+      <h2 class="govuk-heading-m">Risks your identity checks protect against</h2>
+      <p>
+        Types of risk:
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
+          <li>Stolen evidence - Genuine identity evidence used by someone different to the person named on the evidence.</li>
+          <li>Stolen information - Genuine information about a person used by someone else.</li>
+          <li>Created evidence - Fake evidence created about a person.</li>
+          <li>Created information - Personal information created about a stolen or fake identity by someone trying to use that identity</li>
+          <li>Manipulated evidence - Genuine evidence which has been altered or manipulated.</li>
+          <li>Manipulated information - Personal information about an identity which has been changed by someone pretending to be that identity</li>
+        </ul>
+      </p>
+
+    </div>
+
+
+
+    <div class="govuk-grid-column-full">
+      <br>
+      <h2 class="govuk-heading-m">All scores for each element</h2>
+
+      <h3 class="govuk-heading-s govuk-!-margin-top-7">Evidence strength</h3>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Element</th>
+            <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col">Stolen evidence</th>
+            <th class="govuk-table__header" scope="col">Stolen information</th>
+            <th class="govuk-table__header" scope="col">Created evidence</th>
+            <th class="govuk-table__header" scope="col">Manipulated evidence</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence</td>
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence</td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence</td>
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence</td>
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence</td>
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+
+
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence validity</td>
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence validity</td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence validity</td>
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence validity</td>
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Evidence validity</td>
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">History</td>
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">History</td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">History</td>
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">History</td>
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">History</td>
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Fraud</td>
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Fraud</td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Fraud</td>
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Fraud</td>
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Fraud</td>
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">verification</td>
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">verification</td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">verification</td>
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">verification</td>
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">verification</td>
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="govuk-grid-column-full">
+      <br>
+      <h2 class="govuk-heading-m">All scores for each element</h2>
+
+      <h3 class="govuk-heading-s govuk-!-margin-top-7">Evidence strength</h3>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col">Stolen evidence</th>
+            <th class="govuk-table__header" scope="col">Stolen information</th>
+            <th class="govuk-table__header" scope="col">Created evidence</th>
+            <th class="govuk-table__header" scope="col">Manipulated evidence</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-s govuk-!-margin-top-7">Evidence validity</h3>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col">Stolen evidence</th>
+            <th class="govuk-table__header" scope="col">Stolen information</th>
+            <th class="govuk-table__header" scope="col">Created evidence</th>
+            <th class="govuk-table__header" scope="col">Manipulated evidence</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-s govuk-!-margin-top-7">History</h3>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col">Stolen evidence</th>
+            <th class="govuk-table__header" scope="col">Stolen information</th>
+            <th class="govuk-table__header" scope="col">Created evidence</th>
+            <th class="govuk-table__header" scope="col">Manipulated evidence</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-s govuk-!-margin-top-7">Fraud</h3>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col">Stolen evidence</th>
+            <th class="govuk-table__header" scope="col">Stolen information</th>
+            <th class="govuk-table__header" scope="col">Created evidence</th>
+            <th class="govuk-table__header" scope="col">Manipulated evidence</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-s govuk-!-margin-top-7">Verification</h3>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col">Stolen evidence</th>
+            <th class="govuk-table__header" scope="col">Stolen information</th>
+            <th class="govuk-table__header" scope="col">Created evidence</th>
+            <th class="govuk-table__header" scope="col">Manipulated evidence</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+            <td class="govuk-table__cell">None</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- <div class="govuk-grid-column-two-thirds">
+
       <h2 class="govuk-heading-m">Strengths</h2>
 
       <p>You can achieve <span style="">medium confidence</span> in the person’s identity.</p>
@@ -267,7 +823,7 @@
         </p>
       </div>
 
-      <p><a href="/">View identity evidence profiles</a>  </p>
+      <p><a href="/">View identity evidence profiles</a>  </p> -->
 
 
     </div>
