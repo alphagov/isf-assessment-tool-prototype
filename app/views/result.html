@@ -49,8 +49,8 @@
 {% endif %}
 
 {% set A1 = "You find some evidence that shows the identity exists." %}
-{% set A2 = "You know that evidence of the identity exists. (I’m really not sure what this one should be - one to check with the SMEs)" %}
-{% set A3 = "You trust that evidence of the identity exists." %}
+{% set A2 = "You know that evidence of the identity exists." %}
+{% set A3 = "You have evidence the identity exists and when the organisation issued the evidence they checked the person’s identity thoroughly." %}
 {% set A4 = "You find some strong evidence that shows the identity exists." %}
 
 {% set B1 = "You check that it’s genuine." %}
@@ -90,8 +90,7 @@
           <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col">Element</th>
             <th class="govuk-table__header" scope="col">Score</th>
-            <th class="govuk-table__header" scope="col"></th>
-            <th class="govuk-table__header" scope="col"></th>
+            <th class="govuk-table__header" scope="col">Risks</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -100,7 +99,6 @@
               <td class="govuk-table__cell" scope="row">Passport strength</td>
               <td class="govuk-table__cell">3</td>
               <td class="govuk-table__cell">{{A3}}</td>
-              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['evidence'].includes('Passport') %}
@@ -119,7 +117,6 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">{{B1}}</td>
               {% endif %}
-              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['evidence'].includes('Driving licence') %}
@@ -127,7 +124,6 @@
               <td class="govuk-table__cell" scope="row">Driving licence strength</td>
               <td class="govuk-table__cell">3</td>
               <td class="govuk-table__cell">{{A3}}</td>
-              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['evidence'].includes('Driving licence') %}
@@ -143,7 +139,6 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">{{B1}}</td>
               {% endif %}
-              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['other-count'] == "1" %}
@@ -165,7 +160,6 @@
                 <td class="govuk-table__cell">4</td>
                 <td class="govuk-table__cell">{{A4}}</td>
               {% endif %}
-              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['other-count'] == "1" %}
@@ -181,14 +175,13 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">{{B1}}</td>
               {% endif %}
-              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
 
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">History</td>
-            {% if elementE.includes('n/a') %}
+            {% if data['element-e-a'].includes('n/a') %}
                <td class="govuk-table__cell">N/A</td>
                <td class="govuk-table__cell">No history check</td>
             {% elif elementE.includes('90') %}
@@ -204,7 +197,6 @@
               <td class="govuk-table__cell">4</td>
               <td class="govuk-table__cell">{{E4}}</td>
             {% endif %}
-            <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
           </tr>
 
           <tr class="govuk-table__row">
@@ -222,7 +214,6 @@
               <td class="govuk-table__cell">4</td>
               <td class="govuk-table__cell">{{D2}}</td>
             {% endif %}
-            <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
           </tr>
 
           <tr class="govuk-table__row">
@@ -237,7 +228,6 @@
               <td class="govuk-table__cell">2</td>
               <td class="govuk-table__cell">{{C2}}</td>
             {% endif %}
-            <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
           </tr>
         </tbody>
       </table>
