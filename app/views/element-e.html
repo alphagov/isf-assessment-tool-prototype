@@ -35,14 +35,15 @@
 
         {% from "radios/macro.njk" import govukRadios %}
 
+        {% set timeperiod %}
         {{ govukRadios({
           idPrefix: "element-e",
           name: "element-e",
           fieldset: {
             legend: {
-              text: "Over what period of time does your service look for interactions?",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--m"
+              text: "Time period",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
             }
           },
           items: [
@@ -61,13 +62,33 @@
             {
               value: "1080",
               text: "1,080 days"
-            },
+            }
+          ]
+        }) }}
+
+        {% endset -%}
+
+
+        {{ govukRadios({
+          idPrefix: "element-e-a",
+          name: "element-e-a",
+          fieldset: {
+            legend: {
+              text: "Does your service look for interactions?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
             {
-              divider: "or"
-            },
-            {
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: timeperiod
+              }
+            },{
               value: "n/a",
-              text: "It doesn't look for interactions "
+              text: "No"
             }
           ]
         }) }}
