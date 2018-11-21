@@ -48,28 +48,29 @@
   {% set evidence1 = "nil" %}
 {% endif %}
 
-{% set A1 = "You find some evidence that shows the identity exists." %}
-{% set A2 = "You know that evidence of the identity exists." %}
-{% set A3 = "You have evidence the identity exists and when the organisation issued the evidence they checked the person’s identity thoroughly." %}
-{% set A4 = "You find some strong evidence that shows the identity exists." %}
+{% set A1 = "You collect evidence that includes some basic information about the person." %}
+{% set A2 = "You know the person needed to prove their identity to get the evidence. You also know that any digital information the evidence contains is protected by cryptographic security features." %}
+{% set A3 = "You know the organisation made sure the evidence was received by the same person who applied for it." %}
+{% set A4 = "You know the organisation made sure the person matched an image they had from a trusted source." %}
 
-{% set B1 = "You check that it’s genuine." %}
-{% set B2 = "You check that it’s genuine or valid." %}
-{% set B3 = "You check that it’s genuine and valid." %}
-{% set B4 = "You check it’s genuine, valid and protected by cryptographic security features." %}
+{% set B1 = "You've checked the person's details match the details held by the organisation that issued the evidence." %}
+{% set B2 = "You checked details of the evidence (such as its reference number or expiry date) match the details held by the organisation that issued it." %}
+{% set B3 = "You've checked that any security features on the evidence are genuine." %}
+{% set B4 = "You've checked the chip on the passport is genuine." %}
 
-{% set E1 = "You’re sure the identity has been recently active." %}
-{% set E2 = "You’re sure the identity has been active for a reasonably long time." %}
-{% set E3 = "You’re confident that the identity exists in the real world." %}
+{% set E1 = "You know the identity has interacted with other organisations or individuals over the past 3 months." %}
+{% set E2 = "You know the identity has interacted with other organisations or individuals over the past 6 months." %}
+{% set E3 = "You know the identity has interacted with other organisations or individuals over the past 1 year." %}
+{% set E4 = "You know the identity has interacted with other organisations or individuals over the past 3 years." %}
 
-{% set D1 = "You check the person is not at risk of being impersonated." %}
-{% set D2 = "You’re reasonably sure the person is not at risk of being impersonated." %}
-{% set D3 = "You’re confident the person isn’t at risk of being impersonated." %}
+{% set D1 = "You've checked with a reliable and authoritative data source that the identity hasn't been stolen or used fraudulently." %}
+{% set D2 = "You’ve checked with a reliable and authoritative data source that the identity doesn't belong to someone who's died." %}
+{% set D3 = "You've checked with at least one independent, reliable and authoritative data source that the identity hasn't been stolen or used fraudulently." %}
 
-{% set C1 = "You check they know some things about the claimed identity." %}
-{% set C2 = "You’re reasonably sure the person knows some things about the claimed identity." %}
-{% set C3 = "You’re confident that the person matches the identity shown on the evidence." %}
-{% set C4 = "You check that their biometric information matches what’s on the evidence." %}
+{% set C1 = "You've checked the person knows some things about the person they're claiming to be." %}
+{% set C2 = "You’ve checked they match the photo or biometric information on the evidence." %}
+{% set C3 = "You've checked the person can complete tasks that only the person they're claiming to be can do." %}
+{% set C4 = "You've checked that their biometric information matches what’s on the evidence." %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
