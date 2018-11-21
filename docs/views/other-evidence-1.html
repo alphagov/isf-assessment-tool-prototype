@@ -5,48 +5,40 @@
   GOV.UK Prototype Kit
 {% endblock %}
 
-{% block beforeContent %}
-  {% from "back-link/macro.njk" import govukBackLink %}
-  {{ govukBackLink({
-    text: "Back",
-    href: "javascript:history.back()"
-  }) }}
-{% endblock %}
-
 {% block content %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="/driving-licence-answer" method="post" novalidate>
+      <form action="/other-evidence-1-answer" method="post" novalidate>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
         {{ govukCheckboxes({
-          idPrefix: "driving-licence-checks",
-          name: "driving-licence-checks",
+          idPrefix: "other-evidence-1-checks",
+          name: "other-evidence-1-checks",
           fieldset: {
             legend: {
-              text: "How do you check a UK driving licence?",
+              text: "What do you do when you check the " + data['evidence-1-name'] + " ?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
           },
           hint: {
-            text: ""
+            text: "Select all that apply."
           },
           items: [
             {
               value: "1",
-              text: "Check the person's details made what's in the Driver and Vehicle Licensing Agency's (DVLA's) database"
+              text: "Make sure the person's details are the same as those held by the organisation that issued it (or another trusted organisation)"
             },
             {
               value: "2",
-              text: "Check the driving licence number matches what's in DVLA's database"
+              text: "Make sure any other details (for example a reference number or expiry date) are the same as those held by the organisation that issued it (or another trusted organisation)"
             },
             {
               value: "3",
-              text: "Check the driving licence and its security features (such as the holograms) are genuine"
+              text: "Ask trained personnel to make sure the driving licence and any security features (such as the holograms or watermarks) are genuine"
             }
           ]
         }) }}

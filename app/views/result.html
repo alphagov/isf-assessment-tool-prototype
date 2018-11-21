@@ -5,6 +5,26 @@
   GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  {% from "breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+  {{ govukBreadcrumbs({
+  items: [
+    {
+      text: "Identity standard",
+      href: "#"
+    },{
+      text: "Assess how your identity service meets the standard",
+      href: "/index"
+    },
+    {
+      text: "How confident you can be in the person’s identity"
+    }
+  ]
+  }) }}
+
+{% endblock %}
+
 {% block content %}
 
 <!-- set variables -->
@@ -28,6 +48,28 @@
   {% set evidence1 = "nil" %}
 {% endif %}
 
+{% set A1 = "You find some evidence that shows the identity exists." %}
+{% set A2 = "You know that evidence of the identity exists. (I’m really not sure what this one should be - one to check with the SMEs)" %}
+{% set A3 = "You trust that evidence of the identity exists." %}
+{% set A4 = "You find some strong evidence that shows the identity exists." %}
+
+{% set B1 = "You check that it’s genuine." %}
+{% set B2 = "You check that it’s genuine or valid." %}
+{% set B3 = "You check that it’s genuine and valid." %}
+{% set B4 = "You check it’s genuine, valid and protected by cryptographic security features." %}
+
+{% set E1 = "You’re sure the identity has been recently active." %}
+{% set E2 = "You’re sure the identity has been active for a reasonably long time." %}
+{% set E3 = "You’re confident that the identity exists in the real world." %}
+
+{% set D1 = "You check the person is not at risk of being impersonated." %}
+{% set D2 = "You’re reasonably sure the person is not at risk of being impersonated." %}
+{% set D3 = "You’re confident the person isn’t at risk of being impersonated." %}
+
+{% set C1 = "You check they know some things about the claimed identity." %}
+{% set C2 = "You’re reasonably sure the person knows some things about the claimed identity." %}
+{% set C3 = "You’re confident that the person matches the identity shown on the evidence." %}
+{% set C4 = "You check that their biometric information matches what’s on the evidence." %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -35,24 +77,21 @@
         How confident you can be in the person’s identity
       </h1>
 
-      <!-- <h2 class="govuk-heading-l">How confident you can be in the person’s identity</h2> -->
-
-      <p style="font-weight:bold">
-        Your service can achieve a high confidence level.
-      </p>
       <p>
-        This means it lowers the risk of accepting synthetic identities or being attacked by third parties that have stolen other people’s identities.
+        Each element of your identity check can be scored between 0 and 4, how confident you can be depends on how many pieces of evidence you collect and what score they get for each check.
       </p>
-      <p>
-        How confident you can be depends on how many pieces of evidence you collect and what score they get for each check.
-      </p>
-
+    </div>
+    <div class="govuk-grid-column-full">
+      <br>
+      <h2 class="govuk-heading-m">Scores for your checks</h2>
 
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Identity element</th>
+            <th class="govuk-table__header" scope="col">Element</th>
             <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col"></th>
+            <th class="govuk-table__header" scope="col"></th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -60,155 +99,184 @@
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">Passport strength</td>
               <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">{{A3}}</td>
+              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['evidence'].includes('Passport') %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">Passport validity</td>
-              <td class="govuk-table__cell">
-                {% if passportCheck.includes('2') and passportCheck.includes('3') and passportCheck.includes('4') %}
-                  4
-                {% elif passportCheck.includes('2') and ( passportCheck.includes('3') or passportCheck.includes('4') ) %}
-                  3
-                {% elif passportCheck.includes('2') or passportCheck.includes('3') or passportCheck.includes('4') %}
-                  2
-                {% elif passportCheck.includes('1')%}
-                  1
-                {% endif %}
-              </td>
+              {% if passportCheck.includes('2') and passportCheck.includes('3') and passportCheck.includes('4') %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">{{B4}}</td>
+              {% elif passportCheck.includes('2') and ( passportCheck.includes('3') or passportCheck.includes('4') ) %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">{{B3}}</td>
+              {% elif passportCheck.includes('2') or passportCheck.includes('3') or passportCheck.includes('4') %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">{{B2}}</td>
+              {% elif passportCheck.includes('1')%}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">{{B1}}</td>
+              {% endif %}
+              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['evidence'].includes('Driving licence') %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">Driving licence strength</td>
               <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">{{A3}}</td>
+              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['evidence'].includes('Driving licence') %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">Driving licence validity</td>
-              <td class="govuk-table__cell">
-                {% if licenceCheck.includes('2') and licenceCheck.includes('3') %}
-                  3
-                {% elif licenceCheck.includes('2') or licenceCheck.includes('3') %}
-                  2
-                {% elif licenceCheck.includes('1') %}
-                  1
-                {% endif %}
-              </td>
+              {% if licenceCheck.includes('2') and licenceCheck.includes('3') %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">{{B3}}</td>
+              {% elif licenceCheck.includes('2') or licenceCheck.includes('3') %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">{{B2}}</td>
+              {% elif licenceCheck.includes('1') %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">{{B1}}</td>
+              {% endif %}
+              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['other-count'] == "1" %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} strength</td>
-
-              <td class="govuk-table__cell">
-                {% if data['other-evidence-1-a'] == "no" %}
-                  0
-                {% elif data['other-evidence-1-b'] == "no" or  data['other-evidence-1-b'] == "no" or data['other-evidence-1-e'] == "no"%}
-                  1
-                {% elif data['other-evidence-1-f'] == "no" or data['other-evidence-1-g'] == "no" or data['other-evidence-1-h'] == "no" %}
-                  2
-                {% elif data['other-evidence-1-i'] == "no" %}
-                  3
-                {% elif data['other-evidence-1-i'] == "yes" %}
-                  4
-                {% endif %}
-              </td>
+              {% if data['other-evidence-1-a'] == "no" %}
+                <td class="govuk-table__cell">0</td>
+                <td class="govuk-table__cell">{{A0}}</td>
+              {% elif data['other-evidence-1-b'] == "no" or  data['other-evidence-1-b'] == "no" or data['other-evidence-1-e'] == "no"%}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">{{A1}}</td>
+              {% elif data['other-evidence-1-f'] == "no" or data['other-evidence-1-g'] == "no" or data['other-evidence-1-h'] == "no" %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">{{A2}}</td>
+              {% elif data['other-evidence-1-i'] == "no" %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">{{A3}}</td>
+              {% elif data['other-evidence-1-i'] == "yes" %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">{{A4}}</td>
+              {% endif %}
+              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
           {% if data['other-count'] == "1" %}
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} validity</td>
-              <td class="govuk-table__cell">
-                {% if evidence1.includes('2') and evidence1.includes('3') %}
-                  3
-                {% elif evidence1.includes('2') or evidence1.includes('3') %}
-                  2
-                {% elif evidence1.includes('1') %}
-                  1
-                {% endif %}
-              </td>
+              {% if evidence1.includes('2') and evidence1.includes('3') %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">{{B3}}</td>
+              {% elif evidence1.includes('2') or evidence1.includes('3') %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">{{B2}}</td>
+              {% elif evidence1.includes('1') %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">{{B1}}</td>
+              {% endif %}
+              <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
             </tr>
           {% endif %}
 
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">History</td>
-            <td class="govuk-table__cell">
-              {% if elementE.includes('n/a') %}
-               No history check
-              {% elif elementE.includes('90') %}
-                1
-              {% elif elementE.includes('180') %}
-                2
-              {% elif elementE.includes('405') %}
-                3
-              {% elif elementE.includes('1080') %}
-                4
-              {% endif %}
-            </td>
+            {% if elementE.includes('n/a') %}
+               <td class="govuk-table__cell">N/A</td>
+               <td class="govuk-table__cell">No history check</td>
+            {% elif elementE.includes('90') %}
+              <td class="govuk-table__cell">1</td>
+              <td class="govuk-table__cell">{{E1}}</td>
+            {% elif elementE.includes('180') %}
+              <td class="govuk-table__cell">2</td>
+              <td class="govuk-table__cell">{{E2}}</td>
+            {% elif elementE.includes('405') %}
+              <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">{{E3}}</td>
+            {% elif elementE.includes('1080') %}
+              <td class="govuk-table__cell">4</td>
+              <td class="govuk-table__cell">{{E4}}</td>
+            {% endif %}
+            <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
           </tr>
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">Fraud</td>
-            <td class="govuk-table__cell">
-              {% if data['element-d-a'] == "no" %}
-                No fraud check
-              {% elif data['element-d-b'] == "no" %}
-                1
-              {% elif data['element-d-c'] == "1" %}
-                3
-              {% else %}
-                4
-              {% endif %}
-            </td>
+            {% if data['element-d-a'] == "no" %}
+              <td class="govuk-table__cell">N/A</td>
+              <td class="govuk-table__cell">No fraud check</td>
+            {% elif data['element-d-b'] == "no" %}
+              <td class="govuk-table__cell">1</td>
+              <td class="govuk-table__cell">{{D1}}</td>
+            {% elif data['element-d-c'] == "1" %}
+              <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">{{D3}}</td>
+            {% else %}
+              <td class="govuk-table__cell">4</td>
+              <td class="govuk-table__cell">{{D2}}</td>
+            {% endif %}
+            <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
           </tr>
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">Verification</td>
-            <td class="govuk-table__cell">
-              {% if data['element-c-a'] == "no" %}
-               No verification check
-              {% elif (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
-                3
-              {% elif data['element-c-b'].includes('1') or data['element-c-b'].includes('2') or data['element-c-b'].includes('3') %}
-                2
-              {% endif %}
-            </td>
+            {% if data['element-c-a'] == "no" %}
+              <td class="govuk-table__cell">N/A</td>
+              <td class="govuk-table__cell">No verification check</td>
+            {% elif (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
+              <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">{{C3}}</td>
+            {% elif data['element-c-b'].includes('1') or data['element-c-b'].includes('2') or data['element-c-b'].includes('3') %}
+              <td class="govuk-table__cell">2</td>
+              <td class="govuk-table__cell">{{C2}}</td>
+            {% endif %}
+            <td class="govuk-table__cell" style="text-align:right"><a href="#">Change</a></td>
           </tr>
-
         </tbody>
       </table>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
 
-      <h2 class="govuk-heading-m">Meeting identity evidence profiles</h2>
+      <h2 class="govuk-heading-m">Strengths</h2>
+
+      <p>You can achieve <span style="">medium confidence</span> in the person’s identity.</p>
+
       <p>
-        Changing how thoroughly you do each check will give you a different combination of scores. These combinations are also known as 'identity evidence profiles'.
+        Medium confidence lowers the risk of you:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>accepting synthetic identities</li>
+          <li>being targeted by people that could know the identity (but might not be close friends or family)</li>
+          <li>being targeted by people who don't look like the identity</li>
+        </ul>
       </p>
 
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Identity profile</th>
-            <th class="govuk-table__header" scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" scope="row">Passport strength</td>
-            <td class="govuk-table__cell">3</td>
-          </tr>
+      <h2 class="govuk-heading-m">Risks</h2>
+      <p>
+        You may still be at risk of being targeted by people that could know the identity (including close friends or family)</li>
+        </ul>
+      </p>
 
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" scope="row">Passport validity</td>
-            <td class="govuk-table__cell">
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <h2 class="govuk-heading-m">Combining evidence to meet a level of confidence</h2>
 
+      <p>Changing how thoroughly you do each check will give you a different combination of scores. These combinations are also known as ‘identity evidence profiles’.</p>
 
-      <!-- <img src="../../public/images/chart.png" alt="result" width="100%"> -->
+      <div class="govuk-inset-text">
+        <p style="font-weight:bold">Example</p>
+        <p>
+        You want a medium confidence rating in someone's identity. They gave you their UK passport, which has a strength score of 4. As you have a strong piece of evidence, you only need to check recent interactions that they've had with other people or organisations. This will give you a history score of 1.
+        <br><br>
+        If you decide to look for interactions from over a longer period of time you'll be able to accept a weaker piece of evidence, like a credit card statement. Even though you're doing a less thorough strength check, you'll still have medium confidence in the identity because the history check is now more thorough.
+        </p>
+      </div>
+
+      <p><a href="/">View identity evidence profiles</a>  </p>
 
 
     </div>
