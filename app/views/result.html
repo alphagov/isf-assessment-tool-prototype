@@ -165,6 +165,31 @@
   {% set elementEDescription = E4 %}
 {% endif %}
 
+{% if data['element-d-a'] == "no" %}
+  {% set elementDScore = 0 %}
+  {% set elementDDescription = D0 %}
+{% elif data['element-d-b'] == "no" %}
+  {% set elementDScore = 1 %}
+  {% set elementDDescription = D1 %}
+{% elif data['element-d-c'] == "1" %}
+  {% set elementDScore = 3 %}
+  {% set elementDDescription = D3 %}
+{% else %}
+  {% set elementDScore = 4 %}
+  {% set elementDDescription = D3 %}
+{% endif %}
+
+{% if data['element-c-a'] == "no" %}
+  {% set elementCScore = 0 %}
+  {% set elementCDescription = C0 %}
+{% elif (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
+  {% set elementCScore = 3 %}
+  {% set elementCDescription = C3 %}
+{% elif data['element-c-b'].includes('1') or data['element-c-b'].includes('2') or data['element-c-b'].includes('3') %}
+  {% set elementCScore = 2 %}
+  {% set elementCDescription = C2 %}
+{% endif %}
+
 
 
   <div class="govuk-grid-row">
@@ -240,33 +265,14 @@
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">Fraud</td>
-            {% if data['element-d-a'] == "no" %}
-              <td class="govuk-table__cell">N/A</td>
-              <td class="govuk-table__cell">No fraud check</td>
-            {% elif data['element-d-b'] == "no" %}
-              <td class="govuk-table__cell">1</td>
-              <td class="govuk-table__cell">{{D1}}</td>
-            {% elif data['element-d-c'] == "1" %}
-              <td class="govuk-table__cell">3</td>
-              <td class="govuk-table__cell">{{D3}}</td>
-            {% else %}
-              <td class="govuk-table__cell">4</td>
-              <td class="govuk-table__cell">{{D2}}</td>
-            {% endif %}
+            <td class="govuk-table__cell">{{elementDScore}}</td>
+            <td class="govuk-table__cell">{{elementDDescription}}</td>
           </tr>
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">Verification</td>
-            {% if data['element-c-a'] == "no" %}
-              <td class="govuk-table__cell">N/A</td>
-              <td class="govuk-table__cell">No verification check</td>
-            {% elif (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
-              <td class="govuk-table__cell">3</td>
-              <td class="govuk-table__cell">{{C3}}</td>
-            {% elif data['element-c-b'].includes('1') or data['element-c-b'].includes('2') or data['element-c-b'].includes('3') %}
-              <td class="govuk-table__cell">2</td>
-              <td class="govuk-table__cell">{{C2}}</td>
-            {% endif %}
+            <td class="govuk-table__cell">{{elementCScore}}</td>
+            <td class="govuk-table__cell">{{elementCDescription}}</td>
           </tr>
         </tbody>
       </table>
@@ -308,214 +314,336 @@
           </tr>
         </thead>
         <tbody class="govuk-table__body">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence</td>
-            <td class="govuk-table__cell">0</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence</td>
-            <td class="govuk-table__cell">1</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence</td>
-            <td class="govuk-table__cell">2</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence</td>
-            <td class="govuk-table__cell">3</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence</td>
-            <td class="govuk-table__cell">4</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
+          {% if data['evidence'].includes('Passport') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Passport strength</td>
+              {% if elementAPassportScore == 0 %}
+                <td class="govuk-table__cell">0</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAPassportScore == 1 %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAPassportScore == 2 %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAPassportScore == 3 %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAPassportScore == 4 %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% endif %}
+            </tr>
+          {% endif %}
+          {% if data['evidence'].includes('Driving licence') %}
+
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Driving licence strength</td>
+              {% if elementADrivingLicenceScore == 0 %}
+                <td class="govuk-table__cell">0</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementADrivingLicenceScore == 1 %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementADrivingLicenceScore == 2 %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementADrivingLicenceScore == 3 %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementADrivingLicenceScore == 4 %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% endif %}
+            </tr>
+          {% endif %}
+
+          {% if data['other-count'] == "1" %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">{{data['evidence-1-name']}} strength</td>
+              {% if elementAOther1Score == 0 %}
+                <td class="govuk-table__cell">0</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAOther1Score == 1 %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAOther1Score == 2 %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAOther1Score == 3 %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementAOther1Score == 4 %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% endif %}
+            </tr>
+          {% endif %}
 
 
+          {% if data['evidence'].includes('Passport') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Passport validity</td>
+              {% if elementBPassportScore == 0 %}
+                <td class="govuk-table__cell">0</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBPassportScore == 1 %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBPassportScore == 2 %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBPassportScore == 3 %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBPassportScore == 4 %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% endif %}
+            </tr>
+          {% endif %}
 
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence validity</td>
-            <td class="govuk-table__cell">0</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence validity</td>
-            <td class="govuk-table__cell">1</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence validity</td>
-            <td class="govuk-table__cell">2</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence validity</td>
-            <td class="govuk-table__cell">3</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Evidence validity</td>
-            <td class="govuk-table__cell">4</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
+          {% if data['evidence'].includes('Driving licence') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Driving licence validity</td>
+              {% if elementBDrivingLicenceScore == 0 %}
+                <td class="govuk-table__cell">0</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBDrivingLicenceScore == 1 %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBDrivingLicenceScore == 2 %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBDrivingLicenceScore == 3 %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBDrivingLicenceScore == 4 %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% endif %}
+            </tr>
+          {% endif %}
+
+          {% if data['other-count'] == "1" %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">{{data['evidence-1-name']}} validity</td>
+              {% if elementBOther1Score == 0 %}
+                <td class="govuk-table__cell">0</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBOther1Score == 1 %}
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBOther1Score == 2 %}
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBOther1Score == 3 %}
+                <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% elif elementBOther1Score == 4 %}
+                <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">None</td>
+              {% endif %}
+            </tr>
+          {% endif %}
 
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">History</td>
-            <td class="govuk-table__cell">0</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">History</td>
-            <td class="govuk-table__cell">1</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">History</td>
-            <td class="govuk-table__cell">2</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">History</td>
-            <td class="govuk-table__cell">3</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">History</td>
-            <td class="govuk-table__cell">4</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
+            {% if elementEScore == 0 %}
+              <td class="govuk-table__cell">0</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementEScore == 1 %}
+              <td class="govuk-table__cell">1</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementEScore == 2 %}
+              <td class="govuk-table__cell">2</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementEScore == 3 %}
+              <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementEScore == 4 %}
+              <td class="govuk-table__cell">4</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% endif %}
           </tr>
 
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">Fraud</td>
-            <td class="govuk-table__cell">0</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Fraud</td>
-            <td class="govuk-table__cell">1</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Fraud</td>
-            <td class="govuk-table__cell">2</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Fraud</td>
-            <td class="govuk-table__cell">3</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Fraud</td>
-            <td class="govuk-table__cell">4</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
+            {% if elementDScore == 0 %}
+              <td class="govuk-table__cell">0</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementDScore == 1 %}
+              <td class="govuk-table__cell">Fraud</td>
+              <td class="govuk-table__cell">1</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementDScore == 2 %}
+              <td class="govuk-table__cell">2</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementDScore == 3 %}
+              <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementDScore == 4 %}
+              <td class="govuk-table__cell">4</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% endif %}
           </tr>
 
 
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">verification</td>
-            <td class="govuk-table__cell">0</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">verification</td>
-            <td class="govuk-table__cell">1</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">verification</td>
-            <td class="govuk-table__cell">2</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">verification</td>
-            <td class="govuk-table__cell">3</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">verification</td>
-            <td class="govuk-table__cell">4</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
-            <td class="govuk-table__cell">None</td>
+            {% if elementCScore == 0 %}
+              <td class="govuk-table__cell">0</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementCScore == 1 %}
+              <td class="govuk-table__cell">1</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementCScore == 2 %}
+              <td class="govuk-table__cell">2</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementCScore == 3 %}
+              <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% elif elementCScore == 4 %}
+              <td class="govuk-table__cell">4</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">None</td>
+            {% endif %}
           </tr>
         </tbody>
       </table>
