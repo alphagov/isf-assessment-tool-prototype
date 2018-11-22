@@ -280,15 +280,14 @@
     <div class="govuk-grid-column-two-thirds">
       <br>
       <h2 class="govuk-heading-m">Risks you protect against</h2>
+      <p>Different types of check protect against different types of identity fraud risk. You'll need to do a combination of checks to protect against all of them.</p>
       <p>
-        The types of risk include:
+        This table describes your level of protection against somebody with:
         <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
-          <li>Stolen evidence - Genuine identity evidence used by someone different to the person named on the evidence</li>
-          <li>Stolen information - Genuine information about a person used by someone else</li>
-          <li>Created evidence - Fake evidence created about a person</li>
-          <!-- <li>Created information - Personal information created about a stolen or fake identity by someone trying to use that identity</li> -->
-          <li>Manipulated evidence - Genuine evidence which has been altered or manipulated</li>
-          <!-- <li>Manipulated information - Personal information about an identity which has been changed by someone pretending to be that identity</li> -->
+          <li>Stolen evidence - Genuine identity evidence used by someone different to the person named on the evidence.</li>
+          <li>Stolen information - Genuine information about a person used by someone else.</li>
+          <li>Created evidence - Fake evidence created about a person.</li>
+          <li>Manipulated evidence - Genuine evidence which has been altered or manipulated.</li>
         </ul>
       </p>
 
@@ -316,7 +315,7 @@
               <td class="govuk-table__cell">3</td>
               <td class="govuk-table__cell">None</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">High</td>
               <td class="govuk-table__cell">None</td>
             </tr>
           {% endif %}
@@ -327,7 +326,7 @@
               <td class="govuk-table__cell">0</td>
               <td class="govuk-table__cell">None</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">High</td>
               <td class="govuk-table__cell">None</td>
             </tr>
           {% endif %}
@@ -345,26 +344,26 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               {% elif elementAOther1Score == 2 %}
                 <td class="govuk-table__cell">2</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
               {% elif elementAOther1Score == 3 %}
                 <td class="govuk-table__cell">3</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">High</td>
               {% elif elementAOther1Score == 4 %}
                 <td class="govuk-table__cell">4</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">Very high</td>
               {% endif %}
             </tr>
           {% endif %}
@@ -383,26 +382,26 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               {% elif elementBPassportScore == 2 %}
                 <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">High or none</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
               {% elif elementBPassportScore == 3 %}
                 <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">High</td>
               {% elif elementBPassportScore == 4 %}
                 <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">Very high</td>
               {% endif %}
             </tr>
           {% endif %}
@@ -420,26 +419,26 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               {% elif elementBDrivingLicenceScore == 2 %}
                 <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">High or none</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
               {% elif elementBDrivingLicenceScore == 3 %}
                 <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">High</td>
               {% elif elementBDrivingLicenceScore == 4 %}
                 <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">Very high</td>
               {% endif %}
             </tr>
           {% endif %}
@@ -457,26 +456,26 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               {% elif elementBOther1Score == 2 %}
                 <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">High or none</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
               {% elif elementBOther1Score == 3 %}
                 <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">High</td>
               {% elif elementBOther1Score == 4 %}
                 <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">Very high</td>
               {% endif %}
             </tr>
           {% endif %}
@@ -494,25 +493,25 @@
               <td class="govuk-table__cell">1</td>
               <td class="govuk-table__cell">None</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Low</td>
               <td class="govuk-table__cell">None</td>
             {% elif elementEScore == 2 %}
               <td class="govuk-table__cell">2</td>
               <td class="govuk-table__cell">None</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Medium</td>
               <td class="govuk-table__cell">None</td>
             {% elif elementEScore == 3 %}
               <td class="govuk-table__cell">3</td>
               <td class="govuk-table__cell">None</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">High</td>
               <td class="govuk-table__cell">None</td>
             {% elif elementEScore == 4 %}
               <td class="govuk-table__cell">4</td>
               <td class="govuk-table__cell">None</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Very high</td>
               <td class="govuk-table__cell">None</td>
             {% endif %}
           </tr>
@@ -529,34 +528,34 @@
             {% elif elementDScore == 1 %}
               <td class="govuk-table__cell">Fraud</td>
               <td class="govuk-table__cell">1</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Low</td>
+              <td class="govuk-table__cell">Low</td>
+              <td class="govuk-table__cell">Low</td>
+              <td class="govuk-table__cell">Low</td>
             {% elif elementDScore == 2 %}
               <td class="govuk-table__cell">2</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Medium</td>
+              <td class="govuk-table__cell">Medium</td>
+              <td class="govuk-table__cell">Medium</td>
+              <td class="govuk-table__cell">Low</td>
             {% elif elementDScore == 3 %}
               <td class="govuk-table__cell">3</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">Low</td>
             {% elif elementDScore == 4 %}
               <td class="govuk-table__cell">4</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">Low</td>
             {% endif %}
           </tr>
 
 
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell">verification</td>
+            <td class="govuk-table__cell">Verification</td>
             {% if elementCScore == 0 %}
               <td class="govuk-table__cell">0</td>
               <td class="govuk-table__cell">None</td>
@@ -566,27 +565,27 @@
             {% elif elementCScore == 1 %}
               <td class="govuk-table__cell">1</td>
               <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Low</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Low</td>
             {% elif elementCScore == 2 %}
               <td class="govuk-table__cell">2</td>
+              <td class="govuk-table__cell">Medium</td>
+              <td class="govuk-table__cell">Medium</td>
               <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Low or medium</td>
             {% elif elementCScore == 3 %}
               <td class="govuk-table__cell">3</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">Low</td>
+              <td class="govuk-table__cell">Medium</td>
             {% elif elementCScore == 4 %}
               <td class="govuk-table__cell">4</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
-              <td class="govuk-table__cell">None</td>
+              <td class="govuk-table__cell">Very high</td>
+              <td class="govuk-table__cell">Very high</td>
+              <td class="govuk-table__cell">High</td>
+              <td class="govuk-table__cell">High</td>
             {% endif %}
           </tr>
         </tbody>
@@ -632,29 +631,29 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">2</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">3</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">High</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">4</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">Very high</td>
               </tr>
             </tbody>
           </table>
@@ -683,29 +682,29 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">None or high</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">3</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">High</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">4</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">Very high</td>
               </tr>
             </tbody>
           </table>
@@ -734,33 +733,32 @@
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
                 <td class="govuk-table__cell">None</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">2</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
                 <td class="govuk-table__cell">None</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">3</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">High</td>
                 <td class="govuk-table__cell">None</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">4</td>
                 <td class="govuk-table__cell">None</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
                 <td class="govuk-table__cell">None</td>
               </tr>
             </tbody>
           </table>
-
           <h3 class="govuk-heading-m govuk-!-margin-top-7">Fraud</h3>
 
           <table class="govuk-table">
@@ -783,31 +781,31 @@
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">1</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">2</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Low</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">3</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">4</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">N/A</td>
+                <td class="govuk-table__cell">N/A</td>
+                <td class="govuk-table__cell">N/A</td>
+                <td class="govuk-table__cell">N/A</td>
               </tr>
             </tbody>
           </table>
@@ -835,30 +833,30 @@
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">1</td>
                 <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">Medium</td>
+                <td class="govuk-table__cell">Medium</td>
                 <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Low or medium</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">3</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">Low</td>
+                <td class="govuk-table__cell">Medium</td>
               </tr>
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">4</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
-                <td class="govuk-table__cell">None</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">Very high</td>
+                <td class="govuk-table__cell">High</td>
+                <td class="govuk-table__cell">High</td>
               </tr>
             </tbody>
           </table>
