@@ -1,0 +1,68 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/other-evidence-1-f-answer" method="post" novalidate>
+        <span class="govuk-caption-l">Evidence strength</span>
+        <h1 class="govuk-heading-l">Did the organisation make sure the {{data['evidence-1-name']}} was received by the person who applied for it?</h1>
+
+        <p>
+          The organisation can do this by asking for a signature when the evidence is the delivered.
+        </p>
+
+        <p>
+          The evidence must also include both:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>the person’s full name instead of their initials</li>
+            <li>information that’s unique to it (for example a reference number)</li>
+          </ul>
+        </p>
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "other-evidence-1-f",
+          name: "other-evidence-1-f",
+          fieldset: {
+            legend: {
+              text: "",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

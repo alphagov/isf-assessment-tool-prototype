@@ -1,0 +1,103 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/element-d-a" method="post" novalidate>
+        <span class="govuk-caption-l">History checks</span>
+        <h1 class="govuk-heading-l">Do you check if the identity has existed over time?</h1>
+
+        <p>
+          Some examples of interactions that can prove if the identity has been active over a period of time include:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>credit card transactions</li>
+            <li>student loan repayments</li>
+            <li>mortgage payments</li>
+            <li>gas or electricity account payments</li>
+            <li>posts on social media</li>
+          </ul>
+        </p>
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {% set timeperiod %}
+        {{ govukRadios({
+          idPrefix: "element-e",
+          name: "element-e",
+          fieldset: {
+            legend: {
+              text: "Over which period of time do you look for interactions?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "90",
+              text: "3 months"
+            },
+            {
+              value: "180",
+              text: "6 months"
+            },
+            {
+              value: "405",
+              text: "1 year"
+            },
+            {
+              value: "1080",
+              text: "3 years"
+            }
+          ]
+        }) }}
+
+        {% endset -%}
+
+
+        {{ govukRadios({
+          idPrefix: "element-e-a",
+          name: "element-e-a",
+          fieldset: {
+            legend: {
+              text: "",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: timeperiod
+              }
+            },{
+              value: "n/a",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

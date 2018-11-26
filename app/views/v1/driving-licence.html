@@ -1,0 +1,61 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-l">Evidence validity</span>
+      <form action="/driving-licence-answer" method="post" novalidate>
+
+        {% from "checkboxes/macro.njk" import govukCheckboxes %}
+
+        {{ govukCheckboxes({
+          idPrefix: "driving-licence-checks",
+          name: "driving-licence-checks",
+          fieldset: {
+            legend: {
+              text: "How do you check a UK driving licence?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: ""
+          },
+          items: [
+            {
+              value: "1",
+              text: "Check the person's details match what's in the Driver and Vehicle Licensing Agency's (DVLA's) database"
+            },
+            {
+              value: "2",
+              text: "Check the driving licence number matches what's in DVLA's database"
+            },
+            {
+              value: "3",
+              text: "Check the driving licence and its security features (such as the holograms) are genuine"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

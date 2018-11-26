@@ -1,0 +1,61 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "back-link/macro.njk" import govukBackLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/other-evidence-2-answer" method="post" novalidate>
+
+        {% from "checkboxes/macro.njk" import govukCheckboxes %}
+
+        {{ govukCheckboxes({
+          idPrefix: "other-evidence-2-checks",
+          name: "other-evidence-2-checks",
+          fieldset: {
+            legend: {
+              text: "How do you check this piece of evidence?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "Select all that apply."
+          },
+          items: [
+            {
+              value: "1",
+              text: "Check the person's details match what's in the database that belongs to the organisation that issued it"
+            },
+            {
+              value: "2",
+              text: "Check any other details (such as the reference number or expiry date) match what's in a database that belongs to the organisation that issued it"
+            },
+            {
+              value: "3",
+              text: "Check the evidence and any security features it might have (such as holograms or watermarks) are genuine"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
