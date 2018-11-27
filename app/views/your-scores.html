@@ -51,10 +51,11 @@
 {% set A1 = "You collect evidence that includes some basic information about the person." %}
 {% set A2 = "You know the person needed to prove their identity to get the evidence. You also know that any digital information the evidence contains is protected by cryptographic security features." %}
 {% set A3 = "You know the organisation made sure the evidence was received by the same person who applied for it." %}
-{% set A4 = "You know the organisation made sure the person matches an image they had from a trusted source." %}
+{% set A4 = "You know the organisation made sure the person matched an image they had from a trusted source." %}
 
-{% set B1 = "You’ve checked the person's details match the details held by the organisation that issued the evidence." %}
-{% set B2 = "You’ve checked details of the evidence (such as its reference number or expiry date) match the details held by the organisation that issued it." %}
+{% set B0 = "You check the evidence is valid or genuine." %}
+{% set B1 = "You’ve checked the person’s details match the details held by the organisation that issued the evidence." %}
+{% set B2 = "You checked details of the evidence (such as its reference number or expiry date) match the details held by the organisation that issued it." %}
 {% set B3 = "You’ve checked that any security features on the evidence are genuine." %}
 {% set B4 = "You’ve checked the chip on the passport is genuine." %}
 
@@ -201,382 +202,91 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">
-        The strength of your identity checks
+        How your results were calculated
       </h1>
-      <h2 class="govuk-heading-m">
-        Low level of confidence
-      </h2>
-      <p>By doing the checks in the right way, you can have low confidence in someone’s identity.</p>
-      <p>This lowers the risk of you accepting synthetic identities or being targeted by third parties that have stolen other people’s identities.</p>
 
-      <div class="govuk-inset-text">
-        <p>
-          <span style="font-weight:bold">Example</span>
-        </p>
-        <p>
-          The Driver and Vehicle Licensing Agency's (DVLA's) [view driving licence information] service lets users see information that's not sensitive. There's a low risk of identity fraud, so the service only needs low confidence in the user's identity.
-        </p>
-      </div>
 
-      <h2 class="govuk-heading-m">Risks your identity checks protect you against</h2>
-      <p>
-        Based on your answers, your current identity checking process will give you:
-        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
-          <li>[X protection] against someone using stolen evidence (this is evidence that doesn't belong to them)</li>
-          <li>[X protection] against someone using stolen information (this is information that doesn't belong to them)</li>
-          <li>[X protection] against someone using synthetic evidence (this is evidence that they’ve created for an existing person)</li>
-          <li>[X protection] against someone using manipulated evidence (this genuine evidence which has been tampered with)</li>
-        </ul>
-      </p>
+      <h2 class="govuk-heading-m">Scores for your checks</h2>
+
     </div>
     <div class="govuk-grid-column-full">
-
-
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col">Element</th>
-            <th class="govuk-table__header" scope="col">Stolen evidence</th>
-            <th class="govuk-table__header" scope="col">Stolen information</th>
-            <th class="govuk-table__header" scope="col">Synthetic evidence</th>
-            <th class="govuk-table__header" scope="col">Manipulated evidence</th>
+            <th class="govuk-table__header" scope="col">Score</th>
+            <th class="govuk-table__header" scope="col">What you do</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
           {% if data['evidence'].includes('Passport') %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">Passport strength</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">–</td>
+              <td class="govuk-table__cell" scope="row">Passport strength</td>
+              <td class="govuk-table__cell">{{elementAPassportScore}}</td>
+              <td class="govuk-table__cell">{{elementAPassportDescription}}</td>
             </tr>
-          {% endif %}
-          {% if data['evidence'].includes('Driving licence') %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">Driving licence strength</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">–</td>
-            </tr>
-          {% endif %}
-
-          {% if data['other-count'] == "1" %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">{{data['evidence-1-name']}} strength</td>
-              {% if elementAOther1Score == 0 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-              {% elif elementAOther1Score == 1 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Low</td>
-                <td class="govuk-table__cell">Low</td>
-              {% elif elementAOther1Score == 2 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Medium</td>
-                <td class="govuk-table__cell">Medium</td>
-              {% elif elementAOther1Score == 3 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">High</td>
-              {% elif elementAOther1Score == 4 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Very high</td>
-                <td class="govuk-table__cell">Very high</td>
-              {% endif %}
-            </tr>
-          {% endif %}
-
-
-          {% if data['evidence'].includes('Passport') %}
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">Passport validity</td>
-              {% if elementBPassportScore == 0 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-              {% elif elementBPassportScore == 1 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Low</td>
-                <td class="govuk-table__cell">Low</td>
-              {% elif elementBPassportScore == 2 %}
-                <td class="govuk-table__cell">High or none</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Medium</td>
-                <td class="govuk-table__cell">Medium</td>
-              {% elif elementBPassportScore == 3 %}
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">High</td>
-              {% elif elementBPassportScore == 4 %}
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Very high</td>
-                <td class="govuk-table__cell">Very high</td>
-              {% endif %}
+              <td class="govuk-table__cell" scope="row">Passport validity</td>
+              <td class="govuk-table__cell">{{elementBPassportScore}}</td>
+              <td class="govuk-table__cell">{{elementBPassportDescription}}</td>
             </tr>
           {% endif %}
 
           {% if data['evidence'].includes('Driving licence') %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">Driving licence strength</td>
+              <td class="govuk-table__cell">{{elementADrivingLicenceScore}}</td>
+              <td class="govuk-table__cell">{{elementADrivingLicenceDescription}}</td>
+            </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">Driving licence validity</td>
-              {% if elementBDrivingLicenceScore == 0 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-              {% elif elementBDrivingLicenceScore == 1 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Low</td>
-                <td class="govuk-table__cell">Low</td>
-              {% elif elementBDrivingLicenceScore == 2 %}
-                <td class="govuk-table__cell">High or none</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Medium</td>
-                <td class="govuk-table__cell">Medium</td>
-              {% elif elementBDrivingLicenceScore == 3 %}
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">High</td>
-              {% elif elementBDrivingLicenceScore == 4 %}
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Very high</td>
-                <td class="govuk-table__cell">Very high</td>
-              {% endif %}
+              <td class="govuk-table__cell">{{elementADrivingLicenceScore}}</td>
+              <td class="govuk-table__cell">{{elementADrivingLicenceDescription}}</td>
             </tr>
           {% endif %}
 
           {% if data['other-count'] == "1" %}
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">{{data['evidence-1-name']}} validity</td>
-              {% if elementBOther1Score == 0 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-              {% elif elementBOther1Score == 1 %}
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Low</td>
-                <td class="govuk-table__cell">Low</td>
-              {% elif elementBOther1Score == 2 %}
-                <td class="govuk-table__cell">High or none</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Medium</td>
-                <td class="govuk-table__cell">Medium</td>
-              {% elif elementBOther1Score == 3 %}
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">High</td>
-              {% elif elementBOther1Score == 4 %}
-                <td class="govuk-table__cell">High</td>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">Very high</td>
-                <td class="govuk-table__cell">Very high</td>
-              {% endif %}
+              <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} strength</td>
+              <td class="govuk-table__cell">{{elementAOther1Score}}</td>
+              <td class="govuk-table__cell">{{elementAOther1Description}}</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} validity</td>
+              <td class="govuk-table__cell">{{elementBOther1Score}}</td>
+              <td class="govuk-table__cell">{{elementBOther1Description}}</td>
             </tr>
           {% endif %}
 
-
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell">History</td>
-            {% if elementEScore == 0 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-            {% elif elementEScore == 1 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">Low</td>
-              <td class="govuk-table__cell">–</td>
-            {% elif elementEScore == 2 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">Medium</td>
-              <td class="govuk-table__cell">–</td>
-            {% elif elementEScore == 3 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">–</td>
-            {% elif elementEScore == 4 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">Very high</td>
-              <td class="govuk-table__cell">–</td>
-            {% endif %}
+            <td class="govuk-table__cell" scope="row">History</td>
+            <td class="govuk-table__cell">{{elementEScore}}</td>
+            <td class="govuk-table__cell">{{elementEDescription}}</td>
           </tr>
 
-
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Fraud</td>
-            {% if elementDScore == 0 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-            {% elif elementDScore == 1 %}
-              <td class="govuk-table__cell">Low</td>
-              <td class="govuk-table__cell">Low</td>
-              <td class="govuk-table__cell">Low</td>
-              <td class="govuk-table__cell">Low</td>
-            {% elif elementDScore == 2 %}
-              <td class="govuk-table__cell">Medium</td>
-              <td class="govuk-table__cell">Medium</td>
-              <td class="govuk-table__cell">Medium</td>
-              <td class="govuk-table__cell">Low</td>
-            {% elif elementDScore == 3 %}
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">Low</td>
-            {% elif elementDScore == 4 %}
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">Low</td>
-            {% endif %}
+            <td class="govuk-table__cell" scope="row">Fraud</td>
+            <td class="govuk-table__cell">{{elementDScore}}</td>
+            <td class="govuk-table__cell">{{elementDDescription}}</td>
           </tr>
 
-
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell">Verification</td>
-            {% if elementCScore == 0 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">–</td>
-            {% elif elementCScore == 1 %}
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">Low</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">Low</td>
-            {% elif elementCScore == 2 %}
-              <td class="govuk-table__cell">Medium</td>
-              <td class="govuk-table__cell">Medium</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">Low or medium</td>
-            {% elif elementCScore == 3 %}
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">Low</td>
-              <td class="govuk-table__cell">Medium</td>
-            {% elif elementCScore == 4 %}
-              <td class="govuk-table__cell">Very high</td>
-              <td class="govuk-table__cell">Very high</td>
-              <td class="govuk-table__cell">High</td>
-              <td class="govuk-table__cell">High</td>
-            {% endif %}
+            <td class="govuk-table__cell" scope="row">Verification</td>
+            <td class="govuk-table__cell">{{elementCScore}}</td>
+            <td class="govuk-table__cell">{{elementCDescription}}</td>
           </tr>
         </tbody>
       </table>
-      <p>
-        <a href="/your-scores">See how your results were calculated</a>
-      </p>
-      <p>
-        <a href="/your-scores">Find out how to achieve higher confidence for your checks</a>
-      </p>
+      <br><br>
+      <h2 class="govuk-heading-m">All possible scores for each element</h2>
 
-      <!-- <details class="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">
-            How your results were calculated using scores
-          </span>
-        </summary>
-        <div class="govuk-details__text">
-          <table class="govuk-table">
-            <thead class="govuk-table__head">
-              <tr class="govuk-table__row">
-                <th class="govuk-table__header" scope="col">Element</th>
-                <th class="govuk-table__header" scope="col">Score</th>
-                <th class="govuk-table__header" scope="col">What you do</th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-              {% if data['evidence'].includes('Passport') %}
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell" scope="row">Passport strength</td>
-                  <td class="govuk-table__cell">{{elementAPassportScore}}</td>
-                  <td class="govuk-table__cell">{{elementAPassportDescription}}</td>
-                </tr>
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell" scope="row">Passport validity</td>
-                  <td class="govuk-table__cell">{{elementBPassportScore}}</td>
-                  <td class="govuk-table__cell">{{elementBPassportDescription}}</td>
-                </tr>
-              {% endif %}
-
-              {% if data['evidence'].includes('Driving licence') %}
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell" scope="row">Driving licence strength</td>
-                  <td class="govuk-table__cell">{{elementADrivingLicenceScore}}</td>
-                  <td class="govuk-table__cell">{{elementADrivingLicenceDescription}}</td>
-                </tr>
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell">Driving licence validity</td>
-                  <td class="govuk-table__cell">{{elementADrivingLicenceScore}}</td>
-                  <td class="govuk-table__cell">{{elementADrivingLicenceDescription}}</td>
-                </tr>
-              {% endif %}
-
-              {% if data['other-count'] == "1" %}
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} strength</td>
-                  <td class="govuk-table__cell">{{elementAOther1Score}}</td>
-                  <td class="govuk-table__cell">{{elementAOther1Description}}</td>
-                </tr>
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell" scope="row">{{data['evidence-1-name']}} validity</td>
-                  <td class="govuk-table__cell">{{elementBOther1Score}}</td>
-                  <td class="govuk-table__cell">{{elementBOther1Description}}</td>
-                </tr>
-              {% endif %}
-
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell" scope="row">History</td>
-                <td class="govuk-table__cell">{{elementEScore}}</td>
-                <td class="govuk-table__cell">{{elementEDescription}}</td>
-              </tr>
-
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell" scope="row">Fraud</td>
-                <td class="govuk-table__cell">{{elementDScore}}</td>
-                <td class="govuk-table__cell">{{elementDDescription}}</td>
-              </tr>
-
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell" scope="row">Verification</td>
-                <td class="govuk-table__cell">{{elementCScore}}</td>
-                <td class="govuk-table__cell">{{elementCDescription}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
       <details class="govuk-details">
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text">
-            View all possible scores for each type of check
+            Evidence strength
           </span>
         </summary>
         <div class="govuk-details__text">
-          <h3 class="govuk-heading-m govuk-!-margin-top-7">Evidence strength</h3>
-
           <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
@@ -625,9 +335,16 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </details>
 
-          <h3 class="govuk-heading-m govuk-!-margin-top-7">Evidence validity</h3>
-
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Evidence validity
+          </span>
+        </summary>
+        <div class="govuk-details__text">
           <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
@@ -676,9 +393,16 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </details>
 
-          <h3 class="govuk-heading-m govuk-!-margin-top-7">History</h3>
-
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            History
+          </span>
+        </summary>
+        <div class="govuk-details__text">
           <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
@@ -727,8 +451,18 @@
               </tr>
             </tbody>
           </table>
-          <h3 class="govuk-heading-m govuk-!-margin-top-7">Fraud</h3>
+        </div>
+      </details>
 
+
+
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Fraud
+          </span>
+        </summary>
+        <div class="govuk-details__text">
           <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
@@ -777,8 +511,16 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </details>
 
-          <h3 class="govuk-heading-m govuk-!-margin-top-7">Verification</h3>
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Verification
+          </span>
+        </summary>
+        <div class="govuk-details__text">
 
           <table class="govuk-table">
             <thead class="govuk-table__head">
@@ -829,7 +571,8 @@
             </tbody>
           </table>
         </div>
-      </details> -->
+      </details>
+
     </div>
   </div>
 
