@@ -209,7 +209,7 @@
       <p>By doing the checks in the right way, you can have low confidence in someone’s identity.</p>
       <p>This lowers the risk of you accepting synthetic identities or being targeted by third parties that have stolen other people’s identities.</p>
 
-      <div class="govuk-inset-text">
+      <div class="govuk-inset-text govuk-!-margin-bottom-9">
         <p>
           <span style="font-weight:bold">Example</span>
         </p>
@@ -221,60 +221,64 @@
       <h2 class="govuk-heading-m">Risks your identity checks protect you against</h2>
       <p>
         Based on your answers, your current identity checking process will give you:
-        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-9">
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-5">
           <li>
-            {% if elementCScore == 4 %}
-            	very high
-            {% elif elementBPassportScore == 2 or elementBPassportScore == 3 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 2 or elementBDrivingLicenceScore == 3 or elementBDrivingLicenceScore == 4 or elementBOther1Score == 2 or elementBOther1Score == 3 or elementBOther1Score == 4 or elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
-            	high
-            {% elif elementDScore == 2 or elementCScore == 2 %}
-            	medium
-            {% elif elementDScore == 1 %}
-            	low
-            {% else %}
-            	no
-            {% endif %}
-            protection against someone using stolen evidence (this is evidence that doesn't belong to them)</li>
+            <span style="font-weight:bold">
+              {% if elementCScore == 4 %}
+              	very high
+              {% elif elementBPassportScore == 2 or elementBPassportScore == 3 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 2 or elementBDrivingLicenceScore == 3 or elementBDrivingLicenceScore == 4 or elementBOther1Score == 2 or elementBOther1Score == 3 or elementBOther1Score == 4 or elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
+              	high
+              {% elif elementDScore == 2 or elementCScore == 2 %}
+              	medium
+              {% elif elementDScore == 1 %}
+              	low
+              {% else %}
+              	no
+              {% endif %}
+            protection</span> against someone using stolen evidence (this is evidence that doesn't belong to them)</li>
           <li>
-            {% if elementCScore == 4 %}
-              very high
-            {% elif elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
-              high
-            {% elif elementDScore == 2 or elementCScore == 2 %}
-              medium
-            {% elif elementDScore == 1 or elementCScore == 1 %}
-              low
-            {% else %}
-            	no
-            {% endif %}
-            protection against someone using stolen information (this is information that doesn't belong to them)</li>
+            <span style="font-weight:bold">
+              {% if elementCScore == 4 %}
+                very high
+              {% elif elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
+                high
+              {% elif elementDScore == 2 or elementCScore == 2 %}
+                medium
+              {% elif elementDScore == 1 or elementCScore == 1 %}
+                low
+              {% else %}
+              	no
+              {% endif %}
+            protection</span> against someone using stolen information (this is information that doesn't belong to them)</li>
           <li>
-            {% if elementAOther1Score == 4 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementBOther1Score == 4 or elementEScore == 4 %}
-              very high
-            {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementAOther1Score == 3 or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementBOther1Score == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
-              high
-            {% elif elementAOther1Score == 2 or elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementBOther1Score == 2 or elementEScore == 2 or elementDScore == 2 %}
-              medium
-            {% elif elementAOther1Score == 1 or elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or elementBOther1Score == 1 or elementEScore == 1 or elementDScore == 1 or elementCScore == 3 %}
-              low
-            {% else %}
-            	no
-            {% endif %}
-            protection against someone using synthetic evidence (this is evidence that they’ve created for an existing person)</li>
+            <span style="font-weight:bold">
+              {% if elementAOther1Score == 4 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementBOther1Score == 4 or elementEScore == 4 %}
+                very high
+              {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementAOther1Score == 3 or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementBOther1Score == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
+                high
+              {% elif elementAOther1Score == 2 or elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementBOther1Score == 2 or elementEScore == 2 or elementDScore == 2 %}
+                medium
+              {% elif elementAOther1Score == 1 or elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or elementBOther1Score == 1 or elementEScore == 1 or elementDScore == 1 or elementCScore == 3 %}
+                low
+              {% else %}
+              	no
+              {% endif %}
+            protection</span> against someone using synthetic evidence (this is evidence that they’ve created for an existing person)</li>
           <li>
-            {% if elementAOther1Score == 4 or elementBPassportScore == 4  or elementBDrivingLicenceScore == 4 or elementBOther1Score == 4 %}
-              very high
-            {% elif elementAOther1Score == 3 or  elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementBOther1Score == 3 or elementCScore == 4 %}
-              high
-            {% elif elementAOther1Score == 2 or elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementBOther1Score == 2 or elementCScore == 2 or elementCScore == 3 %}
-              medium
-            {% elif elementAOther1Score == 1 or elementBPassportScore == 1 or  elementBDrivingLicenceScore == 1  or elementBOther1Score == 1 or elementDScore == 1 or elementDScore == 2 or elementDScore == 3 or elementDScore == 4 or elementCScore == 1 %}
-              low
-            {% else %}
-            	no
-            {% endif %}
+            <span style="font-weight:bold">
+              {% if elementAOther1Score == 4 or elementBPassportScore == 4  or elementBDrivingLicenceScore == 4 or elementBOther1Score == 4 %}
+                very high
+              {% elif elementAOther1Score == 3 or  elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementBOther1Score == 3 or elementCScore == 4 %}
+                high
+              {% elif elementAOther1Score == 2 or elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementBOther1Score == 2 or elementCScore == 2 or elementCScore == 3 %}
+                medium
+              {% elif elementAOther1Score == 1 or elementBPassportScore == 1 or  elementBDrivingLicenceScore == 1  or elementBOther1Score == 1 or elementDScore == 1 or elementDScore == 2 or elementDScore == 3 or elementDScore == 4 or elementCScore == 1 %}
+                low
+              {% else %}
+              	no
+              {% endif %}
 
-             protection against someone using manipulated evidence (this genuine evidence which has been tampered with)</li>
+             protection</span> against someone using manipulated evidence (this genuine evidence which has been tampered with)</li>
         </ul>
       </p>
     </div>
@@ -536,8 +540,13 @@
       <p>
         <a href="/your-scores">See how your results were calculated</a>
       </p>
+
+      <h2 class="govuk-heading-m  govuk-!-margin-top-9">
+        Next steps
+      </h2>
+
       <p>
-        <a href="/your-scores">Find out how to achieve higher confidence for your checks</a>
+        <a href="https://docs.google.com/document/d/1O1h9sjHA68dtyKzS_9DjUdXXqg-mSV2Ayt90CtpigHw/edit?ts=5bdc6cbe#heading=h.se9w19iwj774">Find out how to do the checks in the right way</a>
       </p>
 
       <!-- <details class="govuk-details">
