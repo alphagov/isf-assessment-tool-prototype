@@ -19,6 +19,11 @@
     <div class="govuk-grid-column-two-thirds">
       <!-- <span class="govuk-caption-l">Evidence</span> -->
       <form action="/what-evidence-answer" method="post" novalidate>
+        <h1 class="govuk-heading-l">What kind of evidence do you collect?</h1>
+
+        <p>
+          Your current process might collect different combinations of evidence depending on who’s identity you’re checking. If it does, answer this question based on just one combination of evidence.
+        </p>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
         {% from "input/macro.njk" import govukInput %}
@@ -29,7 +34,7 @@
           name: "other-count",
           classes: "govuk-input--width-2",
           label: {
-            text: "How many other pieces of evidence?"
+            text: "How many other pieces of evidence do you collect?"
           }
         }) }}
         {% endset -%}
@@ -40,8 +45,8 @@
           name: "evidence",
           fieldset: {
             legend: {
-              text: "What kind of evidence does your service collect?",
-              isPageHeading: true,
+              text: "",
+              isPageHeading: false,
               classes: "govuk-fieldset__legend--l"
             }
           },
