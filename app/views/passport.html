@@ -22,12 +22,48 @@
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
-        {{ govukCheckboxes({
-          idPrefix: "passport-checks",
-          name: "passport-checks",
+        {% set checksHTML %}
+          {{ govukCheckboxes({
+            idPrefix: "passport-checks",
+            name: "passport-checks",
+            fieldset: {
+              legend: {
+                text: "What checks do you do?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: ""
+            },
+            items: [
+              {
+                value: "1",
+                text: "Check the person's details match what's in HM Passport Office's (HMPO's) database"
+              },
+              {
+                value: "2",
+                text: "Check the passport number matches what's in HMPO's database"
+              },
+              {
+                value: "3",
+                text: "Check the passport and its security features (such as the holograms or watermarks) are genuine"
+              },
+              {
+                value: "4",
+                text: "Check the chip on the passport is genuine"
+              }
+            ]
+          }) }}
+        {% endset -%}
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "passport-checks-a",
+          name: "passport-checks-a",
           fieldset: {
             legend: {
-              text: "How do you check a UK passport?",
+              text: "Do you check the UK passport?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
@@ -37,20 +73,15 @@
           },
           items: [
             {
-              value: "1",
-              text: "Check the person's details match what's in HM Passport Office's (HMPO's) database"
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: checksHTML
+              }
             },
             {
-              value: "2",
-              text: "Check the passport number matches what's in HMPO's database"
-            },
-            {
-              value: "3",
-              text: "Check the passport and its security features (such as the holograms or watermarks) are genuine"
-            },
-            {
-              value: "4",
-              text: "Check the chip on the passport is genuine"
+              value: "no",
+              text: "No"
             }
           ]
         }) }}

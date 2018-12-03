@@ -95,6 +95,9 @@
   {% elif passportCheck.includes('1')%}
     {% set elementBPassportScore = 1 %}
     {% set elementBPassportDescription = B1 %}
+  {% else %}
+    {% set elementBPassportScore = 0 %}
+    {% set elementBPassportDescription = B0 %}
   {% endif %}
 
 {% endif %}
@@ -114,6 +117,9 @@
     {% elif licenceCheck.includes('1') %}
       {% set elementBDrivingLicenceScore = 1 %}
       {% set elementBDrivingLicenceDescription = B1 %}
+    {% else %}
+      {% set elementBDrivingLicenceScore = 0 %}
+      {% set elementBDrivingLicenceDescription = B0 %}
     {% endif %}
 
 {% endif %}
@@ -185,7 +191,7 @@
   {% set elementDDescription = D3 %}
 {% endif %}
 
-{% if data['element-c-a'] == "no" %}
+{% if data['element-c-a'] == "no" or data['element-c-b-a'] == "no" %}
   {% set elementCScore = 0 %}
   {% set elementCDescription = C0 %}
 {% elif (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}
@@ -203,19 +209,55 @@
       <h1 class="govuk-heading-l">
         The strength of your identity checks
       </h1>
-      <h2 class="govuk-heading-m">
-        Low level of confidence
-      </h2>
-      <p>By doing the checks in the right way, you can have low confidence in someone’s identity.</p>
-      <p>Your checks lower the risk of you accepting fake (or 'synthetic') identities or being targeted by third parties that have stolen other people’s identities.</p>
 
-      <div class="govuk-inset-text govuk-!-margin-bottom-9">
+      {% if data['result'] == "low" %}
 
-        <p>
-          <span style="font-weight:bold">Example</span><br>
-          The Driver and Vehicle Licensing Agency’s (DVLA’s) <a href="https://www.gov.uk/view-driving-licence">View driving licence information</a> service lets users see information that’s not sensitive. There’s a low risk of identity fraud, so the service only needs low confidence in the user’s identity.
-        </p>
-      </div>
+        <h2 class="govuk-heading-m">
+          Low level of confidence
+        </h2>
+        <p>By doing the checks in the right way, you can have low confidence in someone’s identity.</p>
+        <p>Your checks lower the risk of you accepting fake (or 'synthetic') identities or being targeted by third parties that have stolen other people’s identities.</p>
+
+        <div class="govuk-inset-text govuk-!-margin-bottom-9">
+
+          <p>
+            <span style="font-weight:bold">Example</span><br>
+            The Driver and Vehicle Licensing Agency’s (DVLA’s) <a href="https://www.gov.uk/view-driving-licence">View driving licence information</a> service lets users see information that’s not sensitive. There’s a low risk of identity fraud, so the service only needs low confidence in the user’s identity.
+          </p>
+        </div>
+      {% elif data['result'] == "medium" %}
+        <h2 class="govuk-heading-m">
+          Medium level of confidence
+        </h2>
+        <p>By doing the checks in the right way, you can have Medium confidence in someone’s identity.</p>
+        <p>Your checks lower the risk of you accepting fake (or 'synthetic') identities or being targeted by third parties that have stolen other people’s identities.</p>
+
+        <div class="govuk-inset-text govuk-!-margin-bottom-9">
+
+          <p>
+            <span style="font-weight:bold">Example</span><br>
+            The Driver and Vehicle Licensing Agency’s (DVLA’s) <a href="https://www.gov.uk/view-driving-licence">View driving licence information</a> service lets users see information that’s sensitive. There’s a medium risk of identity fraud, so the service only needs medium confidence in the user’s identity.
+          </p>
+        </div>
+      {% else %}
+        <h2 class="govuk-heading-m">
+          High level of confidence
+        </h2>
+        <p>By doing the checks in the right way, you can have high confidence in someone’s identity.</p>
+        <p>Your checks lower the risk of you accepting fake (or 'synthetic') identities or being targeted by third parties that have stolen other people’s identities.</p>
+
+        <div class="govuk-inset-text govuk-!-margin-bottom-9">
+
+          <p>
+            <span style="font-weight:bold">Example</span><br>
+            The Driver and Vehicle Licensing Agency’s (DVLA’s) <a href="https://www.gov.uk/view-driving-licence">View driving licence information</a> service lets users see information that’s sensitive. There’s a high risk of identity fraud, so the service only needs high confidence in the user’s identity.
+          </p>
+        </div>
+      {% endif %}
+
+
+
+
 
       <h2 class="govuk-heading-m">Risks your identity checks protect you against</h2>
       <p>
@@ -536,6 +578,9 @@
           </tr>
         </tbody>
       </table>
+      <p>
+        <a href="/your-scores">Download this result to share</a>
+      </p>
       <p>
         <a href="/your-scores">See how your results were calculated</a>
       </p>

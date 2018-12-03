@@ -59,7 +59,7 @@ router.post('/other-evidence-1-a-answer', function (req, res) {
     res.redirect('/other-evidence-1-b')
   }
   else {
-    res.redirect('/')
+    res.redirect('/other-evidence-1')
   }
 })
 
@@ -179,7 +179,7 @@ router.post('/element-c-a-answer', function (req, res) {
     res.redirect('/element-c-b')
   }
   else {
-    res.redirect('/result')
+    res.redirect('/calculating-results')
   }
 })
 

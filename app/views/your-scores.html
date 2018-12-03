@@ -51,14 +51,15 @@
   {% set evidence1 = "0" %}
 {% endif %}
 
+{% set A0 = "The evidence is not strong enough to give you confidence in the person’s identity." %}
 {% set A1 = "You collect evidence that includes some basic information about the person." %}
 {% set A2 = "You know the person needed to prove their identity to get the evidence. You also know that any digital information the evidence contains is protected by cryptographic security features." %}
 {% set A3 = "You know the organisation made sure the evidence was received by the same person who applied for it." %}
-{% set A4 = "You know the organisation made sure the person matched an image they had from a trusted source." %}
+{% set A4 = "You know the organisation made sure the person matches an image they had from a trusted source." %}
 
-{% set B0 = "You check the evidence is valid or genuine." %}
-{% set B1 = "You’ve checked the person’s details match the details held by the organisation that issued the evidence." %}
-{% set B2 = "You checked details of the evidence (such as its reference number or expiry date) match the details held by the organisation that issued it." %}
+{% set B0 = "You don’t check the details of the evidence." %}
+{% set B1 = "You’ve checked the person's details match the details held by the organisation that issued the evidence." %}
+{% set B2 = "You’ve checked details of the evidence (such as its reference number or expiry date) match the details held by the organisation that issued it." %}
 {% set B3 = "You’ve checked that any security features on the evidence are genuine." %}
 {% set B4 = "You’ve checked the chip on the passport is genuine." %}
 
@@ -99,6 +100,9 @@
   {% elif passportCheck.includes('1')%}
     {% set elementBPassportScore = 1 %}
     {% set elementBPassportDescription = B1 %}
+  {% else %}
+    {% set elementBPassportScore = 0 %}
+    {% set elementBPassportDescription = B0 %}
   {% endif %}
 
 {% endif %}
@@ -118,6 +122,9 @@
     {% elif licenceCheck.includes('1') %}
       {% set elementBDrivingLicenceScore = 1 %}
       {% set elementBDrivingLicenceDescription = B1 %}
+    {% else %}
+      {% set elementBDrivingLicenceScore = 0 %}
+      {% set elementBDrivingLicenceDescription = B0 %}
     {% endif %}
 
 {% endif %}
@@ -189,7 +196,7 @@
   {% set elementDDescription = D3 %}
 {% endif %}
 
-{% if data['element-c-a'] == "no" %}
+{% if data['element-c-a'] == "no" or data['element-c-b-a'] == "no" %}
   {% set elementCScore = 0 %}
   {% set elementCDescription = C0 %}
 {% elif (data['element-c-b'].includes('1') or data['element-c-b'].includes('2')) and data['element-c-b'].includes('3') %}

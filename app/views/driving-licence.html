@@ -22,12 +22,44 @@
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
-        {{ govukCheckboxes({
-          idPrefix: "driving-licence-checks",
-          name: "driving-licence-checks",
+        {% set checksHTML %}
+          {{ govukCheckboxes({
+            idPrefix: "driving-licence-checks",
+            name: "driving-licence-checks",
+            fieldset: {
+              legend: {
+                text: "What checks do you do?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: ""
+            },
+            items: [
+              {
+                value: "1",
+                text: "Check the person's details match what's in the Driver and Vehicle Licensing Agency's (DVLA's) database"
+              },
+              {
+                value: "2",
+                text: "Check the driving licence number matches what's in DVLA's database"
+              },
+              {
+                value: "3",
+                text: "Check the driving licence and its security features (such as the holograms) are genuine"
+              }
+            ]
+          }) }}
+        {% endset -%}
+
+        {% from "radios/macro.njk" import govukRadios %}
+
+        {{ govukRadios({
+          idPrefix: "driving-licence-checks-a",
+          name: "driving-licence-checks-a",
           fieldset: {
             legend: {
-              text: "How do you check a UK driving licence?",
+              text: "Do you check the UK Driving Licence?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
@@ -37,16 +69,15 @@
           },
           items: [
             {
-              value: "1",
-              text: "Check the person's details match what's in the Driver and Vehicle Licensing Agency's (DVLA's) database"
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: checksHTML
+              }
             },
             {
-              value: "2",
-              text: "Check the driving licence number matches what's in DVLA's database"
-            },
-            {
-              value: "3",
-              text: "Check the driving licence and its security features (such as the holograms) are genuine"
+              value: "no",
+              text: "No"
             }
           ]
         }) }}
