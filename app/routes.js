@@ -179,7 +179,7 @@ router.post('/element-c-a-answer', function (req, res) {
     res.redirect('/element-c-b')
   }
   else {
-    res.redirect('/calculating-results')
+    res.redirect('/your-answers')
   }
 })
 
