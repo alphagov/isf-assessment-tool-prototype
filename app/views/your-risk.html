@@ -17,13 +17,14 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">What is the risk of fraud to your service?</h1>
+      <h1 class="govuk-heading-l">What’s the risk of fraud to your service?</h1>
 
       <p>
-        Something about risk assessments.
-      </p>
+        <!-- To get recommendations from this assessment you need to know how likely your service is to be targeted by identity fraud and what impact identity fraud would have on your service. -->
+        This is used to give recommendations for making your service as secure as it needs to be.
+      </p><br>
 
-      <details class="govuk-details">
+      <!-- <details class="govuk-details">
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text">
             Why we ask this question
@@ -31,10 +32,10 @@
         </summary>
         <div class="govuk-details__text">
           <p>
-            Something about why we ask this question.
+            Knowing how likely your current process is to be targeted by identity fraud and what impact identity fraud would have on your process will help us to give you more useful recommendations.
           </p>
         </div>
-      </details>
+      </details> -->
 
       <form action="/what-evidence" method="post" novalidate>
 
@@ -55,28 +56,28 @@
               value: "none",
               text: "None",
               hint: {
-                text: "You just need to know it‘s the same person"
+                text: "You need to know the person is the same person."
               }
             },
             {
               value: "low",
               text: "Low risk",
               hint: {
-                text: "Get content from connecting"
+                text: "Your service does not give users money or benefits and do not provide access to sensitive information, such as a user’s criminal records."
               }
             },
             {
               value: "medium",
               text: "Medium risk",
               hint: {
-                text: "Get content from connecting"
+                text: "Your service lets users update information about themselves or access sensitive information, such as criminal records."
               }
             },
             {
               value: "high",
               text: "High risk",
               hint: {
-                text: "Get content from connecting"
+                text: "Your service gives users money or benefits"
               }
             },
             {

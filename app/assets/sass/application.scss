@@ -21,3 +21,23 @@ $govuk-global-styles: true;
 td.govuk-table__cell:first-child{
   width: 25%;
 }
+
+.banner{
+  color: #005ea5;
+  text-transform: none;
+  padding: 20px;
+  margin-top: 0px;
+  border-width: 5px;
+  border-style: solid;
+  margin-bottom: 25px;
+}
+
+.banner-message{
+  color: #005ea5;
+  font-family: "nta";
+  -webkit-font-smoothing: antialiased;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 0;
+}
