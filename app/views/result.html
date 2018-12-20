@@ -42,39 +42,6 @@
 
 {% set elementE = data['element-e'] %}
 
-{% if data['other-count'] == "1" and data['other-evidence-1-checks'] %}
-  {% set evidence1 = data['other-evidence-1-checks'] %}
-{% else %}
-  {% set evidence1 = "0" %}
-{% endif %}
-
-{% set A1 = "You collect evidence that includes some basic information about the person." %}
-{% set A2 = "You know the person needed to prove their identity to get the evidence. You also know that any digital information the evidence contains is protected by cryptographic security features." %}
-{% set A3 = "You know the organisation made sure the evidence was received by the same person who applied for it." %}
-{% set A4 = "You know the organisation made sure the person matches an image they had from a trusted source." %}
-
-{% set B1 = "You’ve checked the person's details match the details held by the organisation that issued the evidence." %}
-{% set B2 = "You’ve checked details of the evidence (such as its reference number or expiry date) match the details held by the organisation that issued it." %}
-{% set B3 = "You’ve checked that any security features on the evidence are genuine." %}
-{% set B4 = "You’ve checked the chip on the passport is genuine." %}
-
-{% set E0 = "You don’t check the history of the identity." %}
-{% set E1 = "You know the identity has interacted with other organisations or individuals over the past 3 months." %}
-{% set E2 = "You know the identity has interacted with other organisations or individuals over the past 6 months." %}
-{% set E3 = "You know the identity has interacted with other organisations or individuals over the past 1 year." %}
-{% set E4 = "You know the identity has interacted with other organisations or individuals over the past 3 years." %}
-
-{% set D0 = "You don’t check if the identity has been stolen or used fraudulently." %}
-{% set D1 = "You’ve checked with a reliable and authoritative data source that the identity hasn’t been stolen or used fraudulently." %}
-{% set D2 = "You’ve checked with a reliable and authoritative data source that the identity doesn’t belong to someone who’s died." %}
-{% set D3 = "You’ve checked with at least one independent, reliable and authoritative data source that the identity hasn’t been stolen or used fraudulently." %}
-
-{% set C0 = "You don’t check if the person is the person they’re claiming to be." %}
-{% set C1 = "You’ve checked the person knows some things about the person they’re claiming to be." %}
-{% set C2 = "You’ve checked they match the photo or biometric information on the evidence." %}
-{% set C3 = "You’ve checked the person can complete tasks that only the person they’re claiming to be can do." %}
-{% set C4 = "You’ve checked that their biometric information matches what’s on the evidence." %}
-
 
 <!-- Set user's results based on answers -->
 
@@ -124,42 +91,6 @@
 
 {% endif %}
 
-
-{% if data['other-count'] == "1" %}
-
-    {% if data['other-evidence-1-a'] == "no" %}
-      {% set elementAOther1Score = 0 %}
-      {% set elementAOther1Description = A0 %}
-    {% elif data['other-evidence-1-b'] == "no" or  data['other-evidence-1-b'] == "no" or data['other-evidence-1-e'] == "no"%}
-      {% set elementAOther1Score = 1 %}
-      {% set elementAOther1Description = A1 %}
-    {% elif data['other-evidence-1-f'] == "no" or data['other-evidence-1-g'] == "no" or data['other-evidence-1-h'] == "no" %}
-      {% set elementAOther1Score = 2 %}
-      {% set elementAOther1Description = A2 %}
-    {% elif data['other-evidence-1-i'] == "no" %}
-      {% set elementAOther1Score = 3 %}
-      {% set elementAOther1Description = A3 %}
-    {% elif data['other-evidence-1-i'] == "yes" %}
-      {% set elementAOther1Score = 4 %}
-      {% set elementAOther1Description = A4 %}
-    {% endif %}
-
-    {% if evidence1.includes('2') and evidence1.includes('3') %}
-      {% set elementBOther1Score = 3 %}
-      {% set elementBOther1Description = B3 %}
-    {% elif evidence1.includes('2') or evidence1.includes('3') %}
-      {% set elementBOther1Score = 2 %}
-      {% set elementBOther1Description = B2 %}
-    {% elif evidence1.includes('1') %}
-      {% set elementBOther1Score = 1 %}
-      {% set elementBOther1Description = B1 %}
-    {% elif evidence1.includes('0') %}
-      {% set elementBOther1Score = 0 %}
-      {% set elementBOther1Description = B0 %}
-    {% endif %}
-
-{% endif %}
-
 {% if data['element-e-a'].includes('n/a') %}
   {% set elementEScore = 0 %}
   {% set elementEDescription = E0 %}
@@ -204,21 +135,53 @@
 
 {% set risklevel = data['user-risk-level'] %}
 
-  <div class="banner">
-    <h1 class="banner-message">
-      {% if risklevel == "dont-know" %}
-        Based on the answers you’ve given your service could protect against a high level of fraud.
-      {% elif risklevel == "low" %}
-        Your checks do not protect against your service’s low risk of fraud.
-      {% elif risklevel == "medium" %}
-        Your checks do not protect against your service’s medium risk of fraud.
-      {% elif risklevel == "high" %}
-        Your checks do not protect against your service’s high risk of fraud.
-      {% endif %}
-    </h1>
-  </div>
-
   <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <!-- <h1 class="govuk-heading-xl">Your results</h1> -->
+
+      <div class="govuk-panel govuk-panel--confirmation">
+        <h1 class="govuk-panel__title">
+          Not protected
+          <!-- {% if risklevel == "dont-know" %}
+            Based on the answers you’ve given your service could protect against a high level of fraud.
+          {% elif risklevel == "low" %}
+            Your checks do not protect against your service’s low risk of fraud.
+          {% elif risklevel == "medium" %}
+            Your checks do not protect against your service’s medium risk of fraud.
+          {% elif risklevel == "high" %}
+            Your checks do not protect against your service’s high risk of fraud.
+          {% endif %} -->
+        </h1>
+        <div class="govuk-panel__body">
+          <!-- {% if risklevel == "dont-know" %}
+            Based on the answers you’ve given your service could protect against a high level of fraud.
+          {% elif risklevel == "low" %}
+            Your checks do not protect against your service’s low risk of fraud.
+          {% elif risklevel == "medium" %}
+            Your checks do not protect against your service’s medium risk of fraud.
+          {% elif risklevel == "high" %}
+            Your checks  do not protect against your service’s high risk of fraud.
+          {% endif %} -->
+          Your checks do not protect against {{risklevel}} risk of fraud
+        </div>
+      </div>
+<!--
+      <div class="banner">
+        <h1 class="banner-message">
+          {% if risklevel == "dont-know" %}
+            Based on the answers you’ve given your service could protect against a high level of fraud.
+          {% elif risklevel == "low" %}
+            Your checks do not protect against your service’s low risk of fraud.
+          {% elif risklevel == "medium" %}
+            Your checks do not protect against your service’s medium risk of fraud.
+          {% elif risklevel == "high" %}
+            Your checks do not protect against your service’s high risk of fraud.
+          {% endif %}
+        </h1>
+      </div> -->
+
+    </div>
+
     <div class="govuk-grid-column-two-thirds">
 
       {% if risklevel == "dont-know" %}
@@ -233,14 +196,94 @@
         </div>
       {% endif %}
 
-      <p>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row level-of-protection">
+    <h2 class="visually-hidden">Risks you protect against</h2>
+
+    <div class="govuk-grid-column-one-quarter">
+      <h3 class="visually-hidden">Stolen identity</h3>
+      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+        {% if elementCScore == 4 %}
+          Very high protection
+        {% elif elementBPassportScore == 2 or elementBPassportScore == 3 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 2 or elementBDrivingLicenceScore == 3 or elementBDrivingLicenceScore == 4 or elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
+          High protection
+        {% elif elementDScore == 2 or elementCScore == 2 %}
+          Medium protection
+        {% elif elementDScore == 1 %}
+          Low protection
+        {% else %}
+          No protection
+        {% endif %}
+      </p>
+      <p>against someone using evidence that doesn't belong to them.</p>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <h3 class="visually-hidden">Protection against stolen information</h3>
+      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+        {% if elementCScore == 4 %}
+          Very high protection
+        {% elif elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
+          High protection
+        {% elif elementDScore == 2 or elementCScore == 2 %}
+          Medium protection
+        {% elif elementDScore == 1 or elementCScore == 1 %}
+          Low protection
+        {% else %}
+          No protection
+        {% endif %}
+      </p>
+      <p>against someone using information that doesn't belong to them.</p>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <h3 class="visually-hidden">Protection against synthetic evidence</h3>
+      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+        {% if elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementEScore == 4 %}
+          Very high protection
+        {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
+          High protection
+        {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementEScore == 2 or elementDScore == 2 %}
+          Medium protection
+        {% elif elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or elementEScore == 1 or elementDScore == 1 or elementCScore == 3 %}
+          Low protection
+        {% else %}
+          No protection
+        {% endif %}
+      </p>
+      <p>against someone using evidence they’ve created for an existing person.</p>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <h3 class="visually-hidden">Protection against manipulated evidence</h3>
+      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+        {% if  elementBPassportScore == 4  or elementBDrivingLicenceScore == 4 %}
+          Very high protection
+        {% elif elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementCScore == 4 %}
+          High protection
+        {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementCScore == 2 or elementCScore == 3 %}
+          Medium protection
+        {% elif elementBPassportScore == 1 or  elementBDrivingLicenceScore == 1 or elementDScore == 1 or elementDScore == 2 or elementDScore == 3 or elementDScore == 4 or elementCScore == 1 %}
+          Low protection
+        {% else %}
+          No protection
+        {% endif %}
+      </p>
+      <p>against someone using genuine evidence which has been tampered with.</p>
+    </div>
+  </div>
+
+  <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+  <div class="govuk-grid-row" id="recommendations">
+    <div class="govuk-grid-column-two-thirds">
+      <!-- <p>
         Based on your answers, your current identity checking process will give you:
         <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-5">
           <li>
             <span style="font-weight:bold">
               {% if elementCScore == 4 %}
               	very high
-              {% elif elementBPassportScore == 2 or elementBPassportScore == 3 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 2 or elementBDrivingLicenceScore == 3 or elementBDrivingLicenceScore == 4 or elementBOther1Score == 2 or elementBOther1Score == 3 or elementBOther1Score == 4 or elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
+              {% elif elementBPassportScore == 2 or elementBPassportScore == 3 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 2 or elementBDrivingLicenceScore == 3 or elementBDrivingLicenceScore == 4 or elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
               	high
               {% elif elementDScore == 2 or elementCScore == 2 %}
               	medium
@@ -266,13 +309,13 @@
             protection</span> against someone using stolen information (this is information that doesn't belong to them)</li>
           <li>
             <span style="font-weight:bold">
-              {% if elementAOther1Score == 4 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementBOther1Score == 4 or elementEScore == 4 %}
+              {% if elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementEScore == 4 %}
                 very high
-              {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementAOther1Score == 3 or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementBOther1Score == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
+              {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
                 high
-              {% elif elementAOther1Score == 2 or elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementBOther1Score == 2 or elementEScore == 2 or elementDScore == 2 %}
+              {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementEScore == 2 or elementDScore == 2 %}
                 medium
-              {% elif elementAOther1Score == 1 or elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or elementBOther1Score == 1 or elementEScore == 1 or elementDScore == 1 or elementCScore == 3 %}
+              {% elif elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or elementEScore == 1 or elementDScore == 1 or elementCScore == 3 %}
                 low
               {% else %}
               	no
@@ -280,13 +323,13 @@
             protection</span> against someone using synthetic evidence (this is evidence that they’ve created for an existing person)</li>
           <li>
             <span style="font-weight:bold">
-              {% if elementAOther1Score == 4 or elementBPassportScore == 4  or elementBDrivingLicenceScore == 4 or elementBOther1Score == 4 %}
+              {% if  elementBPassportScore == 4  or elementBDrivingLicenceScore == 4 %}
                 very high
-              {% elif elementAOther1Score == 3 or  elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementBOther1Score == 3 or elementCScore == 4 %}
+              {% elif elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementCScore == 4 %}
                 high
-              {% elif elementAOther1Score == 2 or elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementBOther1Score == 2 or elementCScore == 2 or elementCScore == 3 %}
+              {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementCScore == 2 or elementCScore == 3 %}
                 medium
-              {% elif elementAOther1Score == 1 or elementBPassportScore == 1 or  elementBDrivingLicenceScore == 1  or elementBOther1Score == 1 or elementDScore == 1 or elementDScore == 2 or elementDScore == 3 or elementDScore == 4 or elementCScore == 1 %}
+              {% elif elementBPassportScore == 1 or  elementBDrivingLicenceScore == 1 or elementDScore == 1 or elementDScore == 2 or elementDScore == 3 or elementDScore == 4 or elementCScore == 1 %}
                 low
               {% else %}
               	no
@@ -294,27 +337,51 @@
 
              protection</span> against someone using manipulated evidence (this genuine evidence which has been tampered with)</li>
         </ul>
-      </p>
+      </p> -->
 
-      <h2 class="govuk-heading-m">Recommended next steps</h2>
-
-      <p>
-        You need to meet at least 1 of the following identity profiles to to protect against a {{risklevel}} risk of fraud.
-      </p>
-
-      <h3 class="govuk-heading-s">Meeting profile A</h3>
+      <h2 class="govuk-heading-l">Recommendations</h2>
 
       <p>
-        You have a history score of 2, you need a history score of 3.
-      </p>
-
-      <h3 class="govuk-heading-s">Meeting profile B</h3>
-
-      <p>
-        You'll need to collect another piece of evidence with a strength score of 3 and a validity score of 2.
+        How much confidence you have in the identity will depend on how much evidence you collect and how thoroughly you do each part of the identity checking process. This makes up an identity profile.
       </p>
       <p>
-        You have a history score of 2, you need a history score of 3.
+        To have confidence in the identity you must meet an identity profile.
+      </p>
+
+      <!-- <p>
+        You need to meet at least 1 {{risklevel}} confidence identity profile to protect against a {{risklevel}} risk of fraud.
+      </p> -->
+
+      <p>
+        You need:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>a passport validity score of 3, you scored 2</li>
+          <li>a driving licence validity score of 3, you scored 1</li>
+          <li>to meet at least 1 of the identity profiles</li>
+        </ul>
+      </p>
+
+      <h3 class="govuk-heading-m govuk-!-margin-top-7">Identity profiles for your level of risk</h3>
+
+
+      <h3 class="govuk-heading-s">Profile A</h3>
+
+      <p>
+        To this profile you need to:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>achieve a history score of 3, you have scored 2</li>
+          <li>achieve a history score of 3, you have scored 2</li>
+        </ul>
+      </p>
+
+      <h3 class="govuk-heading-s">Profile B</h3>
+
+      <p>
+        To this profile you need to:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>collect another piece of evidence with a strength score of 2 and a validitiy score of 3</li>
+          <li>achieve a history score of 3, you have scored 2</li>
+        </ul>
       </p>
 
     </div>

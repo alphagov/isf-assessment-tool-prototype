@@ -15,9 +15,6 @@ router.post('/what-evidence-answer', function (req, res) {
   else if (evidence.includes('Driving licence')) {
     res.redirect('driving-licence')
   }
-  else if (evidence.includes('Other')) {
-    res.redirect('/other-evidence-1-name')
-  }
   else {
     res.redirect('/element-e')
   }
@@ -30,9 +27,6 @@ router.post('/passport-answer', function (req, res) {
   if (evidence.includes('Driving licence')) {
     res.redirect('driving-licence')
   }
-  else if (evidence.includes('Other')) {
-    res.redirect('/other-evidence-1-name')
-  }
   else {
     res.redirect('/element-e')
   }
@@ -41,13 +35,7 @@ router.post('/passport-answer', function (req, res) {
 router.post('/driving-licence-answer', function (req, res) {
 
   let evidence = req.session.data['evidence']
-
-  if (evidence.includes('Other')) {
-    res.redirect('/other-evidence-1-name')
-  }
-  else {
-    res.redirect('/element-e')
-  }
+  res.redirect('/element-e')
 })
 
 

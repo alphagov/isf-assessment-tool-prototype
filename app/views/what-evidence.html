@@ -26,15 +26,14 @@
         </p>
 
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
-        {% from "input/macro.njk" import govukInput %}
+        {% from "textarea/macro.njk" import govukTextarea %}
 
         {% set otherHTML %}
-        {{ govukInput({
+        {{ govukTextarea({
           id: "other-count",
           name: "other-count",
-          classes: "govuk-input--width-2",
           label: {
-            text: "How many other pieces of evidence do you collect?"
+            text: "Tell us about the other evidence you collect"
           }
         }) }}
         {% endset -%}
@@ -64,7 +63,7 @@
             },
             {
               value: "Other",
-              text: "Another piece of evidence",
+              text: "Evidence not listed above",
               conditional: {
                 html: otherHTML
               }
