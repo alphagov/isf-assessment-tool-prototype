@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 
-var evidenceCount = 0
 
 // Add your routes here - above the module.exports line
 
@@ -38,101 +37,29 @@ router.post('/driving-licence-answer', function (req, res) {
   res.redirect('/element-e')
 })
 
+router.post('/element-e-answer', function (req, res) {
 
-router.post('/other-evidence-1-a-answer', function (req, res) {
+  let answera = req.session.data['element-e-a']
+  let answer = req.session.data['element-e']
 
-  let answer = req.session.data['other-evidence-1-a']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-b')
+  if (answera === "yes") {
+    if (answer === "1") {
+      req.session.data['elementEScore'] = 1
+    }
+    else if (answer === "2") {
+      req.session.data['elementEScore'] = 2
+    }
+    else if (answer === "3") {
+      req.session.data['elementEScore'] = 3
+    }
+    else if (answer === "4") {
+      req.session.data['elementEScore'] = 4
+    }
   }
   else {
-    res.redirect('/other-evidence-1')
+    req.session.data['elementEScore'] = 0
   }
-})
-
-router.post('/other-evidence-1-b-answer', function (req, res) {
-
-  let answer = req.session.data['other-evidence-1-b']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-c')
-  }
-  else {
-    res.redirect('/other-evidence-1')
-  }
-})
-
-router.post('/other-evidence-1-c-answer', function (req, res) {
-
-  let answer = req.session.data['other-evidence-1-c']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-d')
-  }
-  else {
-    res.redirect('/other-evidence-1-e')
-  }
-})
-
-router.post('/other-evidence-1-d-answer', function (req, res) {
-
-  let answer = req.session.data['other-evidence-1-d']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-f')
-  }
-  else {
-    res.redirect('/other-evidence-1')
-  }
-})
-
-router.post('/other-evidence-1-e-answer', function (req, res) {
-
-  let answer = req.session.data['other-evidence-1-e']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-f')
-  }
-  else {
-    res.redirect('/other-evidence-1')
-  }
-})
-
-router.post('/other-evidence-1-f-answer', function (req, res) {
-
-  let answer = req.session.data['other-evidence-1-f']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-g')
-  }
-  else {
-    res.redirect('/other-evidence-1')
-  }
-})
-
-router.post('/other-evidence-1-g-answer', function (req, res) {
-
-  let answer = req.session.data['other-evidence-1-g']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-h')
-  }
-  else {
-    res.redirect('/other-evidence-1')
-  }
-})
-
-router.post('/other-evidence-1-h-answer', function (req, res) {
-
-  let answer = req.session.data['other-evidence-1-g']
-
-  if (answer === "yes") {
-    res.redirect('/other-evidence-1-i')
-  }
-  else {
-    res.redirect('/other-evidence-1')
-  }
+  res.redirect('/element-d-a')
 })
 
 router.post('/element-d-a-answer', function (req, res) {
@@ -158,6 +85,8 @@ router.post('/element-d-b-answer', function (req, res) {
     res.redirect('/element-c-a')
   }
 })
+
+
 
 router.post('/element-c-a-answer', function (req, res) {
 

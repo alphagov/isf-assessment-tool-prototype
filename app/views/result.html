@@ -137,49 +137,18 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <!-- <h1 class="govuk-heading-xl">Your results</h1> -->
-
-      <div class="govuk-panel govuk-panel--confirmation">
-        <h1 class="govuk-panel__title">
-          Not protected
-          <!-- {% if risklevel == "dont-know" %}
-            Based on the answers you’ve given your service could protect against a high level of fraud.
-          {% elif risklevel == "low" %}
-            Your checks do not protect against your service’s low risk of fraud.
-          {% elif risklevel == "medium" %}
-            Your checks do not protect against your service’s medium risk of fraud.
-          {% elif risklevel == "high" %}
-            Your checks do not protect against your service’s high risk of fraud.
-          {% endif %} -->
-        </h1>
-        <div class="govuk-panel__body">
-          <!-- {% if risklevel == "dont-know" %}
-            Based on the answers you’ve given your service could protect against a high level of fraud.
-          {% elif risklevel == "low" %}
-            Your checks do not protect against your service’s low risk of fraud.
-          {% elif risklevel == "medium" %}
-            Your checks do not protect against your service’s medium risk of fraud.
-          {% elif risklevel == "high" %}
-            Your checks  do not protect against your service’s high risk of fraud.
-          {% endif %} -->
-          Your checks do not protect against {{risklevel}} risk of fraud
+      <h1 class="govuk-heading-l visually-hidden">Your results</h1>
+      <div class="banner">
+        <div class="banner-message">
+          <p class="banner-message">
+            {% if risklevel == "dont-know" %}
+              Based on the answers you’ve given your service could protect against a high level of fraud.
+            {% else %}
+              Your checks do not protect against your service’s {{risklevel}} risk of fraud.
+            {% endif %}
+          </p>
         </div>
       </div>
-<!--
-      <div class="banner">
-        <h1 class="banner-message">
-          {% if risklevel == "dont-know" %}
-            Based on the answers you’ve given your service could protect against a high level of fraud.
-          {% elif risklevel == "low" %}
-            Your checks do not protect against your service’s low risk of fraud.
-          {% elif risklevel == "medium" %}
-            Your checks do not protect against your service’s medium risk of fraud.
-          {% elif risklevel == "high" %}
-            Your checks do not protect against your service’s high risk of fraud.
-          {% endif %}
-        </h1>
-      </div> -->
-
     </div>
 
     <div class="govuk-grid-column-two-thirds">
@@ -204,7 +173,7 @@
 
     <div class="govuk-grid-column-one-quarter">
       <h3 class="visually-hidden">Stolen identity</h3>
-      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+      <p class="govuk-heading-m govuk-!-margin-bottom-2">
         {% if elementCScore == 4 %}
           Very high protection
         {% elif elementBPassportScore == 2 or elementBPassportScore == 3 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 2 or elementBDrivingLicenceScore == 3 or elementBDrivingLicenceScore == 4 or elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
@@ -221,7 +190,7 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       <h3 class="visually-hidden">Protection against stolen information</h3>
-      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+      <p class="govuk-heading-m govuk-!-margin-bottom-2">
         {% if elementCScore == 4 %}
           Very high protection
         {% elif elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
@@ -238,7 +207,7 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       <h3 class="visually-hidden">Protection against synthetic evidence</h3>
-      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+      <p class="govuk-heading-m govuk-!-margin-bottom-2">
         {% if elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementEScore == 4 %}
           Very high protection
         {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
@@ -255,7 +224,7 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       <h3 class="visually-hidden">Protection against manipulated evidence</h3>
-      <p class="govuk-heading-l govuk-!-margin-bottom-2">
+      <p class="govuk-heading-m govuk-!-margin-bottom-2">
         {% if  elementBPassportScore == 4  or elementBDrivingLicenceScore == 4 %}
           Very high protection
         {% elif elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementCScore == 4 %}
@@ -276,82 +245,13 @@
 
   <div class="govuk-grid-row" id="recommendations">
     <div class="govuk-grid-column-two-thirds">
-      <!-- <p>
-        Based on your answers, your current identity checking process will give you:
-        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-5">
-          <li>
-            <span style="font-weight:bold">
-              {% if elementCScore == 4 %}
-              	very high
-              {% elif elementBPassportScore == 2 or elementBPassportScore == 3 or elementBPassportScore == 4 or elementBDrivingLicenceScore == 2 or elementBDrivingLicenceScore == 3 or elementBDrivingLicenceScore == 4 or elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
-              	high
-              {% elif elementDScore == 2 or elementCScore == 2 %}
-              	medium
-              {% elif elementDScore == 1 %}
-              	low
-              {% else %}
-              	no
-              {% endif %}
-            protection</span> against someone using stolen evidence (this is evidence that doesn't belong to them)</li>
-          <li>
-            <span style="font-weight:bold">
-              {% if elementCScore == 4 %}
-                very high
-              {% elif elementDScore == 3 or elementDScore == 4 or elementCScore == 3 %}
-                high
-              {% elif elementDScore == 2 or elementCScore == 2 %}
-                medium
-              {% elif elementDScore == 1 or elementCScore == 1 %}
-                low
-              {% else %}
-              	no
-              {% endif %}
-            protection</span> against someone using stolen information (this is information that doesn't belong to them)</li>
-          <li>
-            <span style="font-weight:bold">
-              {% if elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementEScore == 4 %}
-                very high
-              {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
-                high
-              {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementEScore == 2 or elementDScore == 2 %}
-                medium
-              {% elif elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or elementEScore == 1 or elementDScore == 1 or elementCScore == 3 %}
-                low
-              {% else %}
-              	no
-              {% endif %}
-            protection</span> against someone using synthetic evidence (this is evidence that they’ve created for an existing person)</li>
-          <li>
-            <span style="font-weight:bold">
-              {% if  elementBPassportScore == 4  or elementBDrivingLicenceScore == 4 %}
-                very high
-              {% elif elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementCScore == 4 %}
-                high
-              {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementCScore == 2 or elementCScore == 3 %}
-                medium
-              {% elif elementBPassportScore == 1 or  elementBDrivingLicenceScore == 1 or elementDScore == 1 or elementDScore == 2 or elementDScore == 3 or elementDScore == 4 or elementCScore == 1 %}
-                low
-              {% else %}
-              	no
-              {% endif %}
-
-             protection</span> against someone using manipulated evidence (this genuine evidence which has been tampered with)</li>
-        </ul>
-      </p> -->
-
       <h2 class="govuk-heading-l">Recommendations</h2>
-
       <p>
-        How much confidence you have in the identity will depend on how much evidence you collect and how thoroughly you do each part of the identity checking process. This makes up an identity profile.
+        How much confidence you have in the identity dependd on how much evidence you collect and how thoroughly you do each part of the identity checking process. This makes up an identity profile.
       </p>
       <p>
         To have confidence in the identity you must meet an identity profile.
       </p>
-
-      <!-- <p>
-        You need to meet at least 1 {{risklevel}} confidence identity profile to protect against a {{risklevel}} risk of fraud.
-      </p> -->
-
       <p>
         You need:
         <ul class="govuk-list govuk-list--bullet">

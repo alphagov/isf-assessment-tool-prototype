@@ -20,6 +20,8 @@
       <span class="govuk-caption-l">Evidence validity</span>
       <form action="/passport-answer" method="post" novalidate>
 
+        {{data['foo']}}
+
         {% from "checkboxes/macro.njk" import govukCheckboxes %}
 
         {% set checksHTML %}

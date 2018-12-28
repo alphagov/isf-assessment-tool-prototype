@@ -128,19 +128,14 @@
 
 
 {% if data['element-e-a'].includes('n/a') %}
-  {% set elementEScore = 0 %}
   {% set elementEDescription = E0 %}
-{% elif elementE.includes('90') %}
-  {% set elementEScore = 1 %}
+{% elif elementE.includes('1') %}
   {% set elementEDescription = E1 %}
-{% elif elementE.includes('180') %}
-  {% set elementEScore = 2 %}
+{% elif elementE.includes('2') %}
   {% set elementEDescription = E2 %}
-{% elif elementE.includes('405') %}
-  {% set elementEScore = 3 %}
+{% elif elementE.includes('3') %}
   {% set elementEDescription = E3 %}
-{% elif elementE.includes('1080') %}
-  {% set elementEScore = 4 %}
+{% elif elementE.includes('4') %}
   {% set elementEDescription = E4 %}
 {% endif %}
 
@@ -267,7 +262,7 @@
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">History</td>
             <td class="govuk-table__cell">{{elementEDescription}}</td>
-            <td class="govuk-table__cell">{{elementEScore}}</td>
+            <td class="govuk-table__cell">{{data['elementEScore']}}</td>
             <td class="govuk-table__cell edit"><a href="">Change</a></td>
           </tr>
 
