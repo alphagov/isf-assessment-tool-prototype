@@ -92,19 +92,14 @@
 {% endif %}
 
 {% if data['element-e-a'].includes('n/a') %}
-  {% set elementEScore = 0 %}
   {% set elementEDescription = E0 %}
 {% elif elementE.includes('90') %}
-  {% set elementEScore = 1 %}
   {% set elementEDescription = E1 %}
 {% elif elementE.includes('180') %}
-  {% set elementEScore = 2 %}
   {% set elementEDescription = E2 %}
 {% elif elementE.includes('405') %}
-  {% set elementEScore = 3 %}
   {% set elementEDescription = E3 %}
 {% elif elementE.includes('1080') %}
-  {% set elementEScore = 4 %}
   {% set elementEDescription = E4 %}
 {% endif %}
 
@@ -135,6 +130,19 @@
 
 {% set risklevel = data['user-risk-level'] %}
 
+
+{% if risklevel == "low" %}
+  {% if data['elementEScore'] >= "0" and elementDScore >= "2" and elementCScore >= "2" %}
+    {% set met = "True" %}
+  {% elif data['elementCScore'] >= "3" %}
+    {% set met = "True" %}
+  {% elif data['elementEScore'] >= "3" and elementDScore >= "3" and elementCScore >= "2" %}
+    {% set met = "True" %}=
+  {% else %}
+    {% set met = "False" %}
+  {% endif %}
+{% endif %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-l visually-hidden">Your results</h1>
@@ -144,7 +152,7 @@
             {% if risklevel == "dont-know" %}
               Based on the answers you’ve given your service could protect against a high level of fraud.
             {% else %}
-              Your checks do not protect against your service’s {{risklevel}} risk of fraud.
+              Your checks do {% if met == "False"%}not{% endif %} protect against your service’s {{risklevel}} risk of fraud.
             {% endif %}
           </p>
         </div>
@@ -208,13 +216,13 @@
     <div class="govuk-grid-column-one-quarter">
       <h3 class="visually-hidden">Protection against synthetic evidence</h3>
       <p class="govuk-heading-m govuk-!-margin-bottom-2">
-        {% if elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or elementEScore == 4 %}
+        {% if elementBPassportScore == 4 or elementBDrivingLicenceScore == 4 or data['elementEScore'] == 4 %}
           Very high protection
-        {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or elementEScore == 3 or elementDScore == 3  or elementCScore == 4 %}
+        {% elif data['evidence'].includes('Passport') or data['evidence'].includes('Driving licence') or elementBPassportScore == 3 or elementBDrivingLicenceScore == 3 or data['elementEScore'] == 3 or elementDScore == 3  or elementCScore == 4 %}
           High protection
-        {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or elementEScore == 2 or elementDScore == 2 %}
+        {% elif elementBPassportScore == 2 or elementBDrivingLicenceScore == 2 or data['elementEScore'] == 2 or elementDScore == 2 %}
           Medium protection
-        {% elif elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or elementEScore == 1 or elementDScore == 1 or elementCScore == 3 %}
+        {% elif elementBPassportScore == 1 or elementBDrivingLicenceScore == 1 or data['elementEScore'] == 1 or elementDScore == 1 or elementCScore == 3 %}
           Low protection
         {% else %}
           No protection
@@ -255,34 +263,65 @@
       <p>
         You need:
         <ul class="govuk-list govuk-list--bullet">
-          <li>a passport validity score of 3, you scored 2</li>
-          <li>a driving licence validity score of 3, you scored 1</li>
+          <!-- <li>a passport validity score of 3, you scored 2</li>
+          <li>a driving licence validity score of 3, you scored 1</li> -->
           <li>to meet at least 1 of the identity profiles</li>
         </ul>
       </p>
 
       <h3 class="govuk-heading-m govuk-!-margin-top-7">Identity profiles for your level of risk</h3>
 
+      {% if risklevel == "low" %}
+        <h4 class="govuk-heading-s">Profile A</h4>
 
-      <h3 class="govuk-heading-s">Profile A</h3>
+        <p>
+          To this profile you need to:
+          <ul class="govuk-list govuk-list--bullet">
+            <!-- <li>collect 1 piece of evidence with a strength score of at least 2 and a validitiy score of at least 2</li> -->
+            {% if data['elementEScore'] < "0" %}
+              <li>achieve a history check score of 0</li>
+            {% endif %}
+            {% if elementDScore < "2" %}
+              <li>achieve a verification score of 2</li>
+            {% endif %}
+            {% if elementCScore < "2" %}
+              <li>achieve a fraud check score of 2</li>
+            {% endif %}
+          </ul>
+        </p>
 
-      <p>
-        To this profile you need to:
-        <ul class="govuk-list govuk-list--bullet">
-          <li>achieve a history score of 3, you have scored 2</li>
-          <li>achieve a history score of 3, you have scored 2</li>
-        </ul>
-      </p>
+        <h4 class="govuk-heading-s">Profile B</h4>
 
-      <h3 class="govuk-heading-s">Profile B</h3>
+        <p>
+          To this profile you need to:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>collect 1 piece of evidence with a strength score of at least 3 and a validitiy score of at least 2</li>
+            {% if elementCScore < '3' %}
+              <li>achieve a verification score of 3</li>
+            {% endif %}
+          </ul>
+        </p>
 
-      <p>
-        To this profile you need to:
-        <ul class="govuk-list govuk-list--bullet">
-          <li>collect another piece of evidence with a strength score of 2 and a validitiy score of 3</li>
-          <li>achieve a history score of 3, you have scored 2</li>
-        </ul>
-      </p>
+        <h4 class="govuk-heading-s">Profile C</h4>
+
+        <p>
+          To this profile you need to:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>collect 3 pieces of evidence with a strength score of at least 1 and a validitiy score of at least 1</li>
+            {% if data['elementEScore'] < "3" %}
+              <li>achieve a history check score of 3</li>
+            {% endif %}
+            {% if elementDScore < "3" %}
+              <li>achieve a fraud check score of 3</li>
+            {% endif %}
+            {% if elementCScore < "2" %}
+              <li>achieve a verification score of 2</li>
+            {% endif %}
+          </ul>
+        </p>
+      {% endif %}
+      <br>
+      <p><a href="">Read the guidance on scoring evidence</a></p>
 
     </div>
   </div>
